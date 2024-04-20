@@ -28,6 +28,7 @@ export function useApi<T>(
         // navigateTo('/auth/logout') // TODO
       }
     },
+
     onRequestError({ request, options, error }) {
       // Handle the request errors
       // console.log('ERR HERE 2', error._data.statusCode)
