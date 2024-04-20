@@ -1,7 +1,7 @@
 import type { UseFetchOptions } from 'nuxt/app';
 import {navigateTo, useFetch, useNuxtApp, useRuntimeConfig} from "nuxt/app";
 
-const { public: { baseURL }} = useRuntimeConfig()
+const { public: { API_URL }} = useRuntimeConfig()
 
 export function useApi<T>(
     url: string | (() => string),
@@ -16,7 +16,7 @@ export function useApi<T>(
 
   const fetchOptions: UseFetchOptions<T> = {
     ...opt,
-    baseURL: 'http://localhost:4445/',
+    baseURL: API_URL as string || 'http://localhost:4445/',
     headers: {
       ...options.headers, // Убедитесь, что не перезаписываем уже существующие заголовки
       Authorization: token ? `Bearer ${token}` : '',
