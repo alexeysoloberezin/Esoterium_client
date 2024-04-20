@@ -4,7 +4,6 @@ export default defineNuxtConfig({
   typescript: {
     strict: false
   },
-
   modules: [
     '@pinia/nuxt',
     '@vueuse/nuxt',
@@ -20,7 +19,7 @@ export default defineNuxtConfig({
   primevue: {
     /* Options */
     components: {
-      include: ['Button', 'Toast','Chart', 'Badge','Card','Avatar', 'Dropdown', 'Message', 'Tag', 'DataTable','Menubar', 'InputText', 'Checkbox', 'Column', 'Dialog', 'ConfirmPopup']
+      include: ['Button', 'Toast','Chart', 'Badge','Card','Avatar','InputMask', 'Dropdown', 'Message', 'Tag', 'DataTable','Menubar', 'InputText', 'Checkbox', 'Column', 'Dialog', 'ConfirmPopup']
     }
   },
   devtools: { enabled: true }

@@ -43,7 +43,7 @@
 
 
   <div class="land">
-        <div ref="threeContainer" class="three-js-container"></div>
+    <div ref="threeContainer" class="three-js-container"></div>
   </div>
 
   <div
@@ -125,17 +125,17 @@ const cameraRotate = [
     z: 0,
     model: {
       x: 0,
-      y: 0.3,
+      y: 0.2,
       z: 0,
     }
   },
   {
     x: 0.4,
-    y: 0.3,
+    y: 0.1,
     z: 0,
     model: {
       x: 0,
-      y: 0.3,
+      y: 0.2,
       z: 0,
     }
   }
@@ -208,25 +208,31 @@ function init() {
 
   const sphere = new THREE.SphereGeometry(0.3, 8, 8);
 
-  light1 = new THREE.PointLight(0xff0040, 600);
+  light1 = new THREE.PointLight(0xff0040, 300);
   light1.add(new THREE.Mesh(sphere, new THREE.MeshBasicMaterial({color: 0xff0040})));
   light1.position.set(10, 5, 5);
-
+  //
   scene.add(light1);
-
-  light2 = new THREE.PointLight(0x0040ff, 400);
+  //
+  light2 = new THREE.PointLight(0x0040ff, 200);
   light2.add(new THREE.Mesh(sphere, new THREE.MeshBasicMaterial({color: 0x0040ff})));
   light2.position.set(-5, -10, 5);
   scene.add(light2);
 
   const loader = new GLTFLoader();
-  // loader.load('/the_thinker_by_auguste_rodin/scene.gltf', (gltf) => {
+  // loader.load('', (gltf) => {
 
-  loader.load('/rhetorician/scene.gltf', (gltf) => {
+  const links = [
+      'rhetorician/scene.gltf',
+      '/the_thinker_by_auguste_rodin/scene.gltf',
+      '/assets/scene.glb'
+  ]
+
+  loader.load(links[2], (gltf) => {
     model = gltf.scene;
-    model.scale.set(2.5, 2.5, 2.5);
-    model.position.x = 1; // Сдвиг модели вправо на сцене
-    model.position.y = -2.5 // Сдвиг модели вправо на сцене
+    model.scale.set(1.3, 1.3, 1.3);
+    model.position.x = 0; // Сдвиг модели вправо на сцене
+    model.position.y = -2 // Сдвиг модели вправо на сцене
     scene.add(model);
   });
 
