@@ -1,156 +1,369 @@
 <template>
-  <div class="container">
-    <div class="card">
-      <div class="card-header">Создать админа</div>
+  <HeaderLand/>
+  <CursorCircle/>
 
-      <div class="card-body">
-        <form  class="surface-card relative z-5 p-4 shadow-2 mx-auto  border-round  w-full"
-              style="max-width: 700px">
-          <div>
-            <label for="em" class="block text-900 font-medium mb-2">Почта</label>
-            <InputText v-model="form.email" id="em" type="text" class="w-full mb-3"/>
+  <div class="Land">
+    <span class="Land-line Land-line-1"></span>
+    <span class="Land-line Land-line-2"></span>
+    <span class="Land-line Land-line-3"></span>
+    <span class="Land-line Land-line-4"></span>
+    <swiper
+        :effect="'fade'"
+        :speed="1200"
+        :autoHeight="true"
+        :longSwipesMs="1200"
+        :hashNavigation="{
+          watchState: true,
+        }"
+        :pagination="{
+        clickable: true,
+        type: 'bullets'
+      }"
+        :allowTouchMove="false"
+        :mousewheel="false"
+        ref="mySwiper"
+        @slideChange="onSlideChange"
+        class="my-swiper sm:h-screen"
+        :class="isFirst ? '' : 'pagination-upper'"
+        :breakpoints="{
+        1000: {
+          direction: 'vertical',
+          autoHeight: false,
+          allowTouchMove: false,
+        }
+      }"
+    >
+      <swiper-slide v-for="({ component, hash }, index) in slides" :key="index" :data-hash="hash" class="mainSlide">
+        <component
+            :is="component"
+        />
+      </swiper-slide>
+    </swiper>
+  </div>
 
-            <label for="name" class="block text-900 font-medium mb-2">Имя</label>
-            <InputText v-model="form.name" id="name" type="text" class="w-full mb-3"/>
 
-            <label for="phone" class="block text-900 font-medium mb-2">Телефон</label>
-            <InputText v-model="form.phone" id="phone" type="text" class="w-full mb-3"/>
+  <div class="land">
+        <div ref="threeContainer" class="three-js-container"></div>
+  </div>
 
-            <Button  @click="onSubmit" label="Создать" icon="pi pi-user" class="w-full"></Button>
-          </div>
-        </form>
-      </div>
+  <div
+      class="indexPagination"
+  >
+    <div :class="{ 'animate-number': animate }">
+      {{ indexView }}
     </div>
   </div>
+
 </template>
 
-<script setup lang="ts">
-import {useRouter} from "vue-router";
-import {computed, ref} from "@vue/reactivity";
-import {useAuthStore} from "@/store/auth";
-import {useApi} from "@/composables/useApi";
-import {useNuxtApp} from "nuxt/app";
+<script setup>
+import {Swiper, SwiperSlide, useSwiper} from 'swiper/vue';
+import 'swiper/swiper-bundle.css';
+import SwiperCore, {Mousewheel, Pagination, HashNavigation} from 'swiper';
+import {computed, onMounted, onUnmounted, ref} from 'vue';
+import * as THREE from 'three';
+import {GLTFLoader} from 'three/addons/loaders/GLTFLoader.js';
+import Slide1 from '@/components/Slides/Slide1.vue';
+import About from '@/components/Slides/About.vue';
+import WhyWe from '@/components/Slides/WhyWe.vue';
+import Reviews from '@/components/Slides/Reviews.vue';
+import FormSlide from '@/components/Slides/FormSlide.vue';
+import HeaderLand from "../components/HeaderLand.vue";
+import CursorCircle from "../components/CursorCircle.vue";
+import gsap from 'gsap';
 
-const form = ref({
-  email: '',
-  password: '',
-  phone: ''
+SwiperCore.use([Pagination, Mousewheel, HashNavigation]);
+
+const threeContainer = ref(null);
+let scene, camera, renderer, model, animationId;
+
+const mySwiper = ref(null);
+const isFirst = computed(() => activeIndex.value === 0)
+const isLast = computed(() => activeIndex.value === slides.length - 1)
+const cameraPositions = [
+  new THREE.Vector3(0, 0, 5), // 1
+  new THREE.Vector3(0, 0, 5), // 2
+  new THREE.Vector3(0, 0, 5), // 3
+  new THREE.Vector3(-1, -0.4, 5), // 4
+  new THREE.Vector3(0, 0, 5), // 5
+  new THREE.Vector3(0, 0, 5), // Позиция для второго слайда
+];
+const cameraRotate = [
+  {
+    x: 0.1,
+    y: 0.2,
+    z: 0,
+    model: {
+      x: 0.2,
+      y: 0.5,
+      z: 0,
+    }
+  },
+  {
+    x: 0,
+    y: 0,
+    z: 0,
+    model: {
+      x: 0,
+      y: 1,
+      z: 0,
+    }
+  },
+  {
+    x: 0,
+    y: 0,
+    z: 0,
+    model: {
+      x: 0,
+      y: 0,
+      z: 0,
+    }
+  },
+  {
+    x: 0.4,
+    y: 0.3,
+    z: 0,
+    model: {
+      x: 0,
+      y: 0.3,
+      z: 0,
+    }
+  },
+  {
+    x: 0.4,
+    y: 0.3,
+    z: 0,
+    model: {
+      x: 0,
+      y: 0.3,
+      z: 0,
+    }
+  }
+]
+
+// Функция обновления размеров камеры и рендерера
+function updateSize() {
+  const width = window.innerWidth * 0.6; // 30% от ширины окна
+  const height = window.innerHeight * 1; // 50% от высоты окна
+  camera.aspect = width / height;
+  camera.updateProjectionMatrix();
+  renderer.setSize(width, height);
+}
+
+const slides = [
+  {
+    component: Slide1,
+    hash: "home",
+  },
+  {
+    component: About,
+    hash: "about",
+  },
+  {
+    component: WhyWe,
+    hash: "whywe",
+  },
+  {
+    component: Reviews,
+    hash: "reviews",
+  },
+  {
+    component: FormSlide,
+    hash: "form",
+  },
+]
+const activeIndex = ref(0)
+const animate = ref(false)
+
+const indexView = computed(() => {
+  const idx = activeIndex.value + 1
+  return idx < 10 ? '0' + idx : idx
+})
+
+onMounted(() => {
+  init();
+  animateModel();
+  window.addEventListener('resize', updateSize);
 });
 
-const onSubmit = async () => {
-  console.log('s', form.value)
-  const {data, status, error} = await useApi('client/create', {
-    method: 'post',
-    body: form.value
-  })
+onUnmounted(() => {
+  window.removeEventListener('resize', updateSize);
+  window.cancelAnimationFrame(animationId);
+  renderer.dispose();
+});
 
-  if(status.value === 'success'){
-    useNuxtApp().$toast.success('Client создан')
+let light1, light2, light3, light4;
+
+function init() {
+  // Инициализация сцены, камеры и рендерера
+  scene = new THREE.Scene();
+  camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.4, 1000);
+  renderer = new THREE.WebGLRenderer({alpha: true});
+  updateSize(); // Установите размер согласно процентам
+  threeContainer.value.appendChild(renderer.domElement);
+
+  // Добавление освещения
+  const ambientLight = new THREE.AmbientLight(0xffffff, 0.2);
+  scene.add(ambientLight);
+
+  const sphere = new THREE.SphereGeometry(0.3, 8, 8);
+
+  light1 = new THREE.PointLight(0xff0040, 600);
+  light1.add(new THREE.Mesh(sphere, new THREE.MeshBasicMaterial({color: 0xff0040})));
+  light1.position.set(10, 5, 5);
+
+  scene.add(light1);
+
+  light2 = new THREE.PointLight(0x0040ff, 400);
+  light2.add(new THREE.Mesh(sphere, new THREE.MeshBasicMaterial({color: 0x0040ff})));
+  light2.position.set(-5, -10, 5);
+  scene.add(light2);
+
+  const loader = new GLTFLoader();
+  // loader.load('/the_thinker_by_auguste_rodin/scene.gltf', (gltf) => {
+
+  loader.load('/rhetorician/scene.gltf', (gltf) => {
+    model = gltf.scene;
+    model.scale.set(2.5, 2.5, 2.5);
+    model.position.x = 1; // Сдвиг модели вправо на сцене
+    model.position.y = -2.5 // Сдвиг модели вправо на сцене
+    scene.add(model);
+  });
+
+  // Установка позиции камеры
+  camera.lookAt(new THREE.Vector3(0, 0, 0));
+  camera.position.set(0, 0, 5);
+}
+
+async function animateModel() {
+  animationId = requestAnimationFrame(animateModel);
+
+  if (model) {
+    model.rotation.y += 0.00035;
   }
-  console.log('data', data.value)
-  console.log('status', status.value)
-  console.log('error', error.value)
+
+  await renderer.render(scene, camera);
+  updateCameraPosition(activeIndex.value);
+}
+
+const onSlideChange = (data) => {
+  if (activeIndex.value !== data.activeIndex) {
+    animate.value = true;
+    setTimeout(() => {
+      activeIndex.value = data.activeIndex
+      updateCameraPosition(activeIndex.value);
+    }, 350);
+    setTimeout(() => {
+      animate.value = false;
+    }, 700);
+  }
 };
+
+
+function updateCameraPosition(index) {
+  if (!camera || !camera.position || !model) {
+    console.error('Camera is not initialized');
+    return; // Выход из функции, если камера не инициализирована
+  }
+  // Плавный переход к новой позиции
+  const newPos = cameraPositions[index];
+  const newPosRotate = cameraRotate[index];
+
+  gsap.to(camera.position, {x: newPos.x, y: newPos.y, z: newPos.z, duration: 4}); // Используя GSAP для плавного перехода
+  gsap.to(camera.rotation, {x: newPosRotate.x, y: newPosRotate.y, z: newPosRotate.z, duration: 4}); // Используя GSAP для плавного перехода
+  gsap.to(model.rotation, {x: newPosRotate.model.x, y: newPosRotate.model.y, z: newPosRotate.model.z, duration: 4}); // Используя GSAP для плавного перехода
+}
 </script>
 
-<style scoped>
-.container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
+<style>
+.three-js-container {
+  position: absolute;
+  background: transparent;
+  top: 50%;
+  right: 0;
+  transform: translate(0, -50%);
+  /*border: 1px solid #ccc; !* Для наглядности *!*/
 }
 
-.card {
-  width: 100%;
-  max-width: 400px;
-  margin: auto;
+
+.indexPagination {
+  pointer-events: none;
+  font-size: 280px;
+  font-weight: 700;
+  line-height: 0.74;
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  opacity: 0.15;
+  color: #b03eea;
+  z-index: 1;
 }
 
-.card-header {
-  background-color: #f8f9fa;
-  border-bottom: 1px solid #e9ecef;
-  padding: 1rem;
-  font-size: 1.25rem;
-  text-align: center;
+@media (max-width: 1400px) or (max-height: 800px) {
+  .indexPagination {
+    z-index: 0;
+    font-size: 220px;
+  }
 }
 
-.card-body {
-  padding: 1rem;
+.my-swiper > .swiper-wrapper > .swiper-slide {
+  transition: 1.2s transform, .75s opacity;
+  transform-origin: 30% 30%;
+  transform: scale(0.5) translate(50%, 0%);
 }
 
-.form-group {
-  margin-bottom: 1rem;
+@media (max-width: 1000px) {
+  .my-swiper > .swiper-wrapper {
+    padding-bottom: 35px;
+  }
+
+  .pagination-upper .swiper-pagination {
+    margin-top: -70px;
+  }
 }
 
-.form-control {
-  display: block;
-  width: 100%;
-  padding: 0.375rem 0.75rem;
-  font-size: 1rem;
-  line-height: 1.5;
-  color: #495057;
-  background-color: #fff;
-  background-clip: padding-box;
-  border: 1px solid #ced4da;
-  border-radius: 0.25rem;
-  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+.my-swiper > .swiper-wrapper > .swiper-slide.swiper-slide-active {
+  opacity: 1;
+  transform: scale(1) translate(0%, 0%);
 }
 
-.form-control:focus {
-  border-color: #80bdff;
-  outline: 0;
-  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+.my-swiper > .swiper-pagination {
+  position: absolute;
+  left: 55px;
+  top: 45%;
+  transform: translateY(-50%);
+  height: fit-content;
+  bottom: 0;
+  width: 20px;
 }
 
-.btn {
-  display: inline-block;
-  font-weight: 400;
-  text-align: center;
-  white-space: nowrap;
-  vertical-align: middle;
-  user-select: none;
-  border: 1px solid transparent;
-  padding: 0.375rem 0.75rem;
-  font-size: 1rem;
-  line-height: 1.5;
-  border-radius: 0.25rem;
-  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+@media (max-width: 1535px) {
+  .my-swiper > .swiper-pagination {
+    left: 20px;
+  }
 }
 
-.btn-primary {
-  color: #fff;
-  background-color: #007bff;
-  border-color: #007bff;
+@media (max-width: 1024px) {
+  .my-swiper > .swiper-pagination {
+    position: relative !important;
+    left: initial !important;
+    right: initial !important;
+    top: initial !important;
+    width: fit-content;
+    margin: 0 auto;
+    bottom: 0px !important;
+    z-index: 102;
+    display: flex;
+  }
 }
 
-.btn-primary:hover {
-  color: #fff;
-  background-color: #0069d9;
-  border-color: #0062cc;
+.my-swiper > .swiper-pagination .swiper-pagination-bullet:after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
 }
 
-.btn-link {
-  font-weight: 400;
-  color: #007bff;
-  text-decoration: none;
-}
-
-.btn-link:hover {
-  color: #0056b3;
-  text-decoration: underline;
-}
-
-.alert {
-  padding: 0.75rem 1.25rem;
-  margin-bottom: 1rem;
-  border: 1px solid transparent;
-  border-radius: 0.25rem;
-}
-
-.alert-warning {
-  color: #856404;
-  background-color: #fff3cd;
-  border-color: #ffeeba;
-}
 </style>

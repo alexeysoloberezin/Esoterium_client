@@ -4,21 +4,23 @@ export default defineNuxtConfig({
   typescript: {
     strict: false
   },
+
   modules: [
     '@pinia/nuxt',
     '@vueuse/nuxt',
     'nuxt-primevue'
   ],
   css: [
-    '~/assets/css/main.css',
+    '~/assets/css/main.scss',
     'primeicons/primeicons.css',
     'primeflex/primeflex.css',
     'primevue/resources/themes/aura-light-pink/theme.css'
   ],
+  plugins: ['~/plugins/swiper.ts'],
   primevue: {
     /* Options */
     components: {
-      include: ['Button', 'Toast','Chart', 'Badge','Card', 'Dropdown', 'Message', 'Tag', 'DataTable','Menubar', 'InputText', 'Checkbox', 'Column', 'Dialog', 'ConfirmPopup']
+      include: ['Button', 'Toast','Chart', 'Badge','Card','Avatar', 'Dropdown', 'Message', 'Tag', 'DataTable','Menubar', 'InputText', 'Checkbox', 'Column', 'Dialog', 'ConfirmPopup']
     }
   },
   devtools: { enabled: true }

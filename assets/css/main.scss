@@ -1,0 +1,199 @@
+@import "https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,400;1,700&display=swap";
+@import "https://fonts.googleapis.com/icon?family=Material+Icons";
+@import url('https://fonts.googleapis.com/css2?family=Prata&display=swap');
+
+$font1: "Prata", serif;
+$primary: #ec4899;
+$sec: #b03eea;
+
+.font-title {
+  font-family: $font1;
+}
+
+h1 {
+  font-size: 42px;
+  @extend .font-title;
+  line-height: 1.4;
+  margin-bottom: 15px;
+  text-shadow: 1px 1px 8px rgba($primary, .38);
+}
+
+h5 {
+  font-size: 18px;
+  line-height: 1.5;
+  font-weight: 300;
+}
+
+p {
+  font-size: 18px;
+  line-height: 1.55;
+  font-weight: 300
+}
+
+body, * {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.container {
+  max-width: 1500px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.logo {
+  width: 280px;
+}
+
+body {
+  /*background: #100f0f;*/
+}
+
+body:after {
+  content: '';
+}
+
+.Land {
+  background: #100f0f;
+  color: #fff;
+  min-height: 100vh;
+  padding: 100px 0;
+}
+
+.mainSlide {
+  @media (max-width: 1700px) and (min-width: 1000px) {
+    padding-left: 110px;
+  }
+  @media (max-width: 1000px) {
+    padding-left: 20px;
+  }
+}
+
+.Land:after, .Land:before {
+  content: '';
+  position: fixed; /* Фиксированное позиционирование относительно viewport */
+  z-index: 1;
+  opacity: 0.1;
+  pointer-events: none; /* Позволяет кликам проходить сквозь элемент */
+}
+
+.Land:after {
+  top: 0vh;
+  right: 0vw;
+  bottom: 0;
+  opacity: 0.05;
+  transform: translateX(25%);
+  width: 80vw; /* Ширина вьюпорта */
+  height: 100%; /* Высота вьюпорта */
+  background-image: radial-gradient(circle at center, $primary 0%, rgba(#100f0f, 0) 80%);
+}
+
+.Land:before {
+  left: 4vw;
+  bottom: 0vh;
+  transform: translateX(-50%);
+  opacity: .12;
+  width: 100vw; /* Ширина вьюпорта */
+  height: 100vh; /* Высота вьюпорта */
+  background-image: radial-gradient(circle at center, rgba($sec, .5) 0%, rgba(#100f0f, 0) 80%);
+}
+
+.Land-line {
+  position: fixed;
+  top: 0;
+  height: 100vh;
+  width: 1px;
+  opacity: 0.1;
+  pointer-events: none;
+  background: #fff;
+}
+
+.Land-line-1 {
+  left: 20vw;
+}
+
+.Land-line-2 {
+  left: 40vw;
+}
+
+.Land-line-3 {
+  left: 60vw;
+}
+
+.Land-line-4 {
+  left: 80vw;
+}
+
+.container_wrp {
+  max-width: 800px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  min-height: calc(100vh - 100px);
+  opacity: 0;
+  transition: .4s;
+  transition-delay: .3s;
+
+  p {
+    max-width: 600px;
+  }
+}
+
+.swiper-slide-active .container_wrp {
+  opacity: 1;
+}
+
+.container_box {
+  margin-bottom: 50px;
+}
+
+.just-list {
+  li {
+    margin-bottom: 13px;
+  }
+}
+
+.ttu {
+  text-transform: uppercase;
+}
+
+
+.animate-number {
+  animation: swipeDown 0.7s ease-in-out;
+}
+
+@keyframes swipeDown {
+  0% {
+    transform: translate(0, 0);
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+    transform: translate(50%, 100%);
+  }
+  100% {
+    transform: translate(0, 0);
+    opacity: 1;
+  }
+}
+
+
+.bg-card {
+  background: rgba(16, 15, 15, 0.7);
+  backdrop-filter: blur(10px); // Применяем размытие к фону
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 15px; // Подберите подходящее значение, которое вы использовали в Tailwind
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); // Пример тени, подберите параметры под ваш дизайн
+}
+
+@import "slider";
