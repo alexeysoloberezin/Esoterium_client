@@ -16,7 +16,7 @@ export function useApi<T>(
 
   const fetchOptions: UseFetchOptions<T> = {
     ...opt,
-    baseURL: API_URL as string ||  'http://82.147.71.137:4445/' || 'http://localhost:4445/',
+    baseURL: API_URL as string ||  'http://82.147.71.137/' || 'http://localhost:4445/',
     headers: {
       ...options.headers, // Убедитесь, что не перезаписываем уже существующие заголовки
       Authorization: token ? `Bearer ${token}` : '',
