@@ -49,10 +49,11 @@ const pay = async () => {
     })
 
     if (error.value) {
-      console.log('11g',error.value)
       if (Array.isArray(error.value.data.message) && error.value.data.message.length) {
         useNuxtApp().$toast?.error(error.value.data.message.join('\n----\n'))
-      } else {
+      } else if(error.value?.message){
+        useNuxtApp().$toast?.error(error.value.message)
+      }else{
         useNuxtApp().$toast?.error('Ошибка')
       }
       loading.value = false
