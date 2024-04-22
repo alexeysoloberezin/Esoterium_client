@@ -52,7 +52,7 @@ const pay = async () => {
       if (Array.isArray(error.value.data.message) && error.value.data.message.length) {
         useNuxtApp().$toast?.error(error.value.data.message.join('\n----\n'))
       } else if(error.value?.data?.message){
-        useNuxtApp().$toast?.error(error.value.message)
+        useNuxtApp().$toast?.error(error.value.data.message)
       }else{
         useNuxtApp().$toast?.error('Ошибка')
       }
