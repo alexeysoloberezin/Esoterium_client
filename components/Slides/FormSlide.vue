@@ -28,6 +28,7 @@
 import {useAnimate} from "@/composables/useAnimate";
 import {useApi} from "@/composables/useApi";
 import {useNuxtApp} from "nuxt/app";
+import {onMounted} from "vue";
 
 const form = ref({
   email: 'test@gmail.com',
@@ -35,6 +36,13 @@ const form = ref({
 })
 
 const loading = ref(false)
+
+onMounted(async () => {
+  console.log('mounted')
+  const {status, data, error}: any = await useApi('/form-list/test', {
+    method: 'get',
+  })
+})
 
 const pay = async () => {
   console.log('pay')
