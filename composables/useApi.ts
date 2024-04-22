@@ -24,6 +24,9 @@ export function useApi<T>(
     $fetch: useNuxtApp().$customFetch,
     onResponseError({ request, response, options }) {
       // console.log('ERR HERE',response._data.statusCode)
+      if(response._data.statusCode === 502 ){
+        useNuxtApp().$toast.error('Ошибка сервера ')
+      }
       if(response._data.statusCode === 403 || response._data.statusCode === 401){
         // navigateTo('/auth/logout') // TODO
       }
