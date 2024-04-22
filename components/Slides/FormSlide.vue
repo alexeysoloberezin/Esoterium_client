@@ -37,13 +37,6 @@ const form = ref({
 
 const loading = ref(false)
 
-onMounted(async () => {
-  console.log('mounted')
-  const {status, data, error}: any = await useApi('/form-list/test', {
-    method: 'get',
-  })
-})
-
 const pay = async () => {
   console.log('pay')
   loading.value = true
@@ -52,15 +45,17 @@ const pay = async () => {
 
     const {status, data, error}: any = await useApi('/payment/getPaymentLink', {
       method: 'post',
-      body: form.value
+      body: form.value,
     })
 
     if (error.value) {
+      console.log('11g',error.value)
       if (Array.isArray(error.value.data.message) && error.value.data.message.length) {
         useNuxtApp().$toast?.error(error.value.data.message.join('\n----\n'))
       } else {
         useNuxtApp().$toast?.error('Ошибка')
       }
+      loading.value = false
       return
     }
 
