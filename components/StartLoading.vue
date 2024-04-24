@@ -75,6 +75,34 @@ const setAnimation = () => {
   background: #100f0f;
   z-index: 99999;
 
+  &:after, &:before {
+    content: '';
+    position: fixed; /* Фиксированное позиционирование относительно viewport */
+    z-index: 1;
+    opacity: 0.1;
+    pointer-events: none; /* Позволяет кликам проходить сквозь элемент */
+  }
+
+  &:after {
+    top: 0vh;
+    right: 0vw;
+    bottom: 0;
+    opacity: 0.1;
+    transform: translateX(25%);
+    width: 80vw; /* Ширина вьюпорта */
+    height: 100%; /* Высота вьюпорта */
+    background-image: radial-gradient(circle at center, #ec4899 0%, rgba(#100f0f, 0) 80%);
+  }
+
+  &:before {
+    left: 4vw;
+    bottom: 0vh;
+    transform: translateX(-50%);
+    opacity: .18;
+    width: 100vw; /* Ширина вьюпорта */
+    height: 100vh; /* Высота вьюпорта */
+    background-image: radial-gradient(circle at center, rgba(#b03eea, .5) 0%, rgba(#100f0f, 0) 80%);
+  }
   &-sp{
     position: absolute;
     top: 0;

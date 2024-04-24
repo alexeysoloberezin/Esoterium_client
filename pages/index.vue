@@ -97,7 +97,10 @@ const cameraRotate = [
       x: 0.2,
       y: 0.5,
       z: 0,
-    }
+    },
+    l1: [-3, -5, -4],
+    l2: [-3, -5, -4],
+    l3: [-3, -5, -4],
   },
   {
     x: 0,
@@ -107,17 +110,23 @@ const cameraRotate = [
       x: 0,
       y: 1,
       z: 0,
-    }
+    },
+    l1: [7, 4, 4],
+    l2: [4, 8, 4],
+    l3: [-3, -5, -4],
   },
   {
-    x: 0,
-    y: 0,
+    x: 0.15,
+    y: 0.2,
     z: 0,
     model: {
       x: 0,
-      y: 0,
+      y: 0.2,
       z: 0,
-    }
+    },
+    l1: [9, 7, 3],
+    l2: [4,-2,9],
+    l3: [-3, -5, -4],
   },
   {
     x: 0.4,
@@ -127,17 +136,23 @@ const cameraRotate = [
       x: 0,
       y: 0.2,
       z: 0,
-    }
+    },
+    l1: [5, 4, 6],
+    l2: [-4, -5, -5],
+    l3: [-3, -5, -4],
   },
   {
-    x: 0.4,
-    y: 0.1,
-    z: 0,
+    x: 0.35,
+    y: 0.35,
+    z: -0.5,
     model: {
       x: 0,
-      y: 0.2,
+      y: 5.2,
       z: 0,
-    }
+    },
+    l1: [3, 3, 3],
+    l2: [-1, -5, 5],
+    l3: [-3, -5, -4],
   }
 ]
 
@@ -203,18 +218,48 @@ function init() {
   threeContainer.value.appendChild(renderer.domElement);
 
   // Добавление освещения
-  const ambientLight = new THREE.AmbientLight(0xffffff, 0.2);
+  const ambientLight = new THREE.AmbientLight(0x55555, 0.2);
   scene.add(ambientLight);
 
   const sphere = new THREE.SphereGeometry(0.3, 8, 8);
 
-  light1 = new THREE.PointLight(0xff0040, 300);
+  // const spotLightIntensity = 150;
+  const spotLightIntensity = 20;
+  const spotLightColor = 0xffffff;
+
+  const spotLight = new THREE.SpotLight(spotLightColor, spotLightIntensity);
+  spotLight.position.set(10, 10, 10); // Позиция для прожектора
+
+// Угол рассеивания света
+  spotLight.angle = Math.PI / 6; // Угол в радианах, например, 30 градусов
+
+// Убывание интенсивности света
+  spotLight.decay = 2;
+
+// Расстояние, на котором интенсивность света уменьшается до нуля
+  spotLight.distance = 0;
+
+// Пенумбра — мягкость края тени
+  spotLight.penumbra = 0.5;
+
+// Направление прожектора
+  spotLight.target.position.set(0, 0, 0);
+  scene.add(spotLight.target);
+
+// Для настройки теней
+  spotLight.castShadow = true;
+
+  scene.add(spotLight);
+
+  // light1 = new THREE.PointLight(0xdb2777, 200);
+  light1 = new THREE.PointLight(0xdb2777, 20);
   light1.add(new THREE.Mesh(sphere, new THREE.MeshBasicMaterial({color: 0xff0040})));
   light1.position.set(10, 5, 5);
   //
   scene.add(light1);
   //
-  light2 = new THREE.PointLight(0x0040ff, 200);
+  // light2 = new THREE.PointLight(0x0040ff, 80);
+  light2 = new THREE.PointLight(0x0040ff, 10);
   light2.add(new THREE.Mesh(sphere, new THREE.MeshBasicMaterial({color: 0x0040ff})));
   light2.position.set(-5, -10, 5);
   scene.add(light2);
@@ -225,7 +270,8 @@ function init() {
   const links = [
       'rhetorician/scene.gltf',
       '/the_thinker_by_auguste_rodin/scene.gltf',
-      '/assets/scene.glb'
+      '/assets/scene.glb',
+      '/assets/scene2.glb'
   ]
 
   loader.load(links[2], (gltf) => {
@@ -233,8 +279,26 @@ function init() {
     model.scale.set(1.3, 1.3, 1.3);
     model.position.x = 0; // Сдвиг модели вправо на сцене
     model.position.y = -2 // Сдвиг модели вправо на сцене
+
+
+    console.log('model', model)
+    var spiral = model.getObjectByName('Spiral002');
+
+    var glowingMaterial = new THREE.MeshPhongMaterial({
+      color: 0xdb2777, // фиолетовый цвет
+      emissive: 0xdb2777, // делает цвет светящимся
+      emissiveIntensity: 4 // интенсивность свечения
+    });
+
+    // console.log('spiral', spiral)
+    if(spiral){
+      spiral.material = glowingMaterial;
+    }
+
     scene.add(model);
   });
+
+
 
   // Установка позиции камеры
   camera.lookAt(new THREE.Vector3(0, 0, 0));
@@ -275,9 +339,13 @@ function updateCameraPosition(index) {
   const newPos = cameraPositions[index];
   const newPosRotate = cameraRotate[index];
 
-  gsap.to(camera.position, {x: newPos.x, y: newPos.y, z: newPos.z, duration: 4}); // Используя GSAP для плавного перехода
-  gsap.to(camera.rotation, {x: newPosRotate.x, y: newPosRotate.y, z: newPosRotate.z, duration: 4}); // Используя GSAP для плавного перехода
-  gsap.to(model.rotation, {x: newPosRotate.model.x, y: newPosRotate.model.y, z: newPosRotate.model.z, duration: 4}); // Используя GSAP для плавного перехода
+  const duration = 7
+
+  gsap.to(light1.position.set, {x: newPosRotate.l1[0], y: newPosRotate.l1[1], z: newPosRotate.l1[2], duration}); // Используя GSAP для плавного перехода
+  gsap.to(light2.position.set, {x: newPosRotate.l2[0], y: newPosRotate.l2[1], z: newPosRotate.l2[2], duration}); // Используя GSAP для плавного перехода
+  gsap.to(camera.position, {x: newPos.x, y: newPos.y, z: newPos.z, duration}); // Используя GSAP для плавного перехода
+  gsap.to(camera.rotation, {x: newPosRotate.x, y: newPosRotate.y, z: newPosRotate.z, duration}); // Используя GSAP для плавного перехода
+  gsap.to(model.rotation, {x: newPosRotate.model.x, y: newPosRotate.model.y, z: newPosRotate.model.z, duration}); // Используя GSAP для плавного перехода
 }
 </script>
 
