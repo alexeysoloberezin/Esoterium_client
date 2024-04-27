@@ -16,6 +16,7 @@
     />
 
     <div v-if="savedStudent" class="text-white">
+      {{ savedStudent }}
       <Button  @click="visible = true"  size="small" outlined class="hoverable px-3 mr-3" style="height: 40px">
         <div>У&nbsp;вас&nbsp;есть&nbsp;доступный&nbsp;контакт</div>
       </Button>
@@ -34,11 +35,19 @@
 <script setup lang="ts">
 import {ref} from "vue";
 import { onMounted, onUnmounted } from 'vue';
-import {useLocalStorage, useWindowSize} from "@vueuse/core";
+import {useLocalStorage, useStorage, useWindowSize} from "@vueuse/core";
 import StartLoading from "@/components/StartLoading.vue";
 import TelegramContact from "@/components/TelegramContact.vue";
 
-const savedStudent = useLocalStorage('student', null)
+const savedStudent = useStorage('student',
+    null,
+    undefined,
+    {
+      serializer: {
+        read: (v: any) => v ? JSON.parse(v) : null,
+        write: (v: any) => JSON.stringify(v),
+      },
+    },)
 const visible = ref(false)
 
  const navLinks = [
