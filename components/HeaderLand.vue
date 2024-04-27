@@ -16,7 +16,6 @@
     />
 
     <div v-if="savedStudent" class="text-white">
-      {{ savedStudent }}
       <Button  @click="visible = true"  size="small" outlined class="hoverable px-3 mr-3" style="height: 40px">
         <div>У&nbsp;вас&nbsp;есть&nbsp;доступный&nbsp;контакт</div>
       </Button>
