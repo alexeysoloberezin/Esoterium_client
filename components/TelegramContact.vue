@@ -16,7 +16,7 @@
     </template>
     <template #footer>
       <div class="flex gap-3 mt-0">
-        <a :href="telegram" class="telegramContact-btn">
+        <a :href="telegram" class="telegramContact-btn" target="_blank">
           Открыть телеграм
         </a>
       </div>

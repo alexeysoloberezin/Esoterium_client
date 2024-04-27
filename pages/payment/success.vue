@@ -1,5 +1,4 @@
 <template>
-
   <div class="relative loginPage w-screen h-screen" style="background: #6b6982">
     <div class="absolute top-0 left-50 loginPage-image" style="transform: translateX(-50%)">
       <img  src="/hand.webp" alt="">
