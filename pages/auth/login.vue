@@ -56,30 +56,5 @@ const form = ref({
 </script>
 
 <style>
-.loginPage{
-  min-height: 100vh;
-  padding: 210px 0 80px;
-}
-.loginPage-image{
-  position: relative;
-  opacity: .6;
-}
-.loginPage-image:after{
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 200px;
-  height: 100%;
-  background: linear-gradient(-90deg, rgb(107, 105, 130, 0), rgb(107, 105, 130));
-}
-.loginPage-image:before{
-  content: '';
-  position: absolute;
-  top: 0;
-  right: 0;
-  width: 200px;
-  height: 100%;
-  background: linear-gradient(90deg, rgb(107, 105, 130, 0), rgb(107, 105, 130));
-}
+
 </style>

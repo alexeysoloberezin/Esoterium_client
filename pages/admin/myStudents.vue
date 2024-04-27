@@ -6,8 +6,8 @@
           Добавить ученика
         </Button>
 
-        <Dialog v-model:visible="visible" modal header="Добавить ученика" :style="{ width: '25rem' }">
-          <div class="flex align-items-center gap-3 mb-3">
+        <Dialog v-model:visible="visible" class="p-3" modal header="Добавить ученика" :style="{ width: '25rem' }">
+          <div class="flex align-items-center gap-3 mb-3 mt-3">
             <label for="username" class="font-semibold w-6rem">Почта</label>
             <InputText v-model="studentData.email" id="username" class="flex-auto" autocomplete="off"/>
           </div>

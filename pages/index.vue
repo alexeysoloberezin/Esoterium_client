@@ -270,8 +270,9 @@ function init() {
   const links = [
       'rhetorician/scene.gltf',
       '/the_thinker_by_auguste_rodin/scene.gltf',
-      '/assets/scene.glb',
-      '/assets/scene2.glb'
+      '/assets/sc.glb',
+      '/assets/scene2.glb',
+      '/assets/scene3.glb',
   ]
 
   loader.load(links[2], (gltf) => {

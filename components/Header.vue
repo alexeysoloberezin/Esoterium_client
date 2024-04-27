@@ -1,6 +1,6 @@
 <template>
   <div class="card">
-    <Menubar :model="items">
+    <Menubar :model="items" class="p-2">
       <template #start>
         <svg width="35" height="40" viewBox="0 0 35 40" fill="none" xmlns="http://www.w3.org/2000/svg" class="h-2rem">
           <path
@@ -14,7 +14,7 @@
         </svg>
       </template>
       <template #item="{ item, props, hasSubmenu, root }">
-        <RouterLink :to="item.path" v-ripple class="flex align-items-center" v-bind:class="{ 'text-primary': $route.path === item.path }" v-bind="props.action">
+        <RouterLink :to="item.path" v-ripple class="flex align-items-center mx-2" v-bind:class="{ 'text-primary': $route.path === item.path }" v-bind="props.action">
           <span :class="item.icon"/>
           <span class="ml-2" >{{ item.label }}</span>
           <Badge v-if="item.badge" :class="{ 'ml-auto': !root, 'ml-2': root }" :value="item.badge"/>
@@ -26,10 +26,10 @@
       </template>
       <template #end>
         <div class="flex align-items-center gap-2">
-          <InputText placeholder="Search" type="text" class="w-8rem sm:w-auto"/>
+          <InputText placeholder="Search" type="text" class="w-8rem sm:w-auto px-2 py-2 ml-2"/>
           <Avatar image="https://primefaces.org/cdn/primevue/images/avatar/amyelsner.png" shape="circle"/>
           <RouterLink to="/auth/logout">
-            <Button>
+            <Button class="p-2">
               Выход
             </Button>
           </RouterLink>

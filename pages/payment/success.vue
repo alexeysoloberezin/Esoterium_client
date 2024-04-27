@@ -1,7 +1,14 @@
 <template>
-  <h1>Success</h1>
-  {{ route.query }}
 
+  <div class="relative loginPage w-screen h-screen" style="background: #6b6982">
+    <div class="absolute top-0 left-50 loginPage-image" style="transform: translateX(-50%)">
+      <img  src="/hand.webp" alt="">
+    </div>
+    <div class="relative bg-card mx-auto py-3 z-10 text-white rounded-lg" style="max-width: 450px">
+      <h1 class="text-center my-2">Успешная оплата</h1>
+      <h3 v-if="loading" class="text-center my-2">Ожидайте получения контакта...</h3>
+    </div>
+  </div>
 
   <Dialog v-model:visible="visible" modal :closable="false" class="successTelegramModal">
     <TelegramContact :telegram="telegram" :show-close="true" @update:close="() => close()"/>
@@ -18,6 +25,7 @@ const visible = ref(false)
 const telegram = ref('')
 const route = useRoute()
 const {_payform_order_id, _payform_status} = route.query
+const loading = ref(false)
 
 const close = () => {
   visible.value = false
@@ -28,6 +36,7 @@ onMounted(async () => {
   const localToken = localStorage.getItem('paymentToken')
 
   const tokenCorrect = localToken === _payform_order_id
+  loading.value = true
 
   if (
       _payform_status !== 'success'
@@ -41,6 +50,7 @@ onMounted(async () => {
     // todo: error page
     console.log('ERROR')
 
+    loading.value = false
     return
     // navigateTo('/payment/error')
   }
@@ -54,6 +64,7 @@ onMounted(async () => {
 
   if (getPaymentStatus.value !== 'success') {
     useNuxtApp().$toast?.error('Ошибка, токен не действителен')
+    loading.value = false
     return
   }
 
@@ -64,6 +75,7 @@ onMounted(async () => {
 
   if (status.value !== 'success' || !data.value?.student) {
     useNuxtApp().$toast.error('Ошибка при создании клиента')
+    loading.value = false
     return
   }
 
@@ -71,6 +83,7 @@ onMounted(async () => {
 
   if (!student) {
     useNuxtApp().$toast.error('Ошибка при создании студента')
+    loading.value = false
     return
   }
 
@@ -78,6 +91,7 @@ onMounted(async () => {
   telegram.value = student.telegram || 'test telegram'
   localStorage.removeItem('paymentToken')
   visible.value = true
+  loading.value = false
 })
 </script>
 
