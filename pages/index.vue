@@ -316,16 +316,18 @@ async function animateModel() {
     model.rotation.y += 0.0004;
   }
 
-  if(model.children[1].rotation.y > 2){
-    end = true
-  }else if(model.children[1].rotation.y < 0.2){
-    end = false
-  }
+  if(Array.isArray(model.children) && model.children.length > 0){
+    if(model.children[1].rotation.y > 2){
+      end = true
+    }else if(model.children[1].rotation.y < 0.2){
+      end = false
+    }
 
-  if(end){
-    model.children[1].rotation.y += -0.003
-  }else{
-    model.children[1].rotation.y += +0.003
+    if(end){
+      model.children[1].rotation.y += -0.003
+    }else{
+      model.children[1].rotation.y += +0.003
+    }
   }
 
   await renderer.render(scene, camera);

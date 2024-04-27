@@ -1,5 +1,5 @@
 <template>
-  <Card style="width: 25rem; overflow: hidden" class="telegramContact">
+  <Card style="overflow: hidden" class="telegramContact">
     <template #header>
       <Telegram style="max-width: 70px;margin: -15px 0 0 -15px"/>
       <!--      <img alt="user header" src="/images/usercard.png" />-->
@@ -59,6 +59,7 @@ const closeContact = () => {
   box-shadow: 0 0 0px 5px #434a72;
   color: #fff;
   padding: 20px;
+  width: 300px;
   margin: 20px auto;
 
   &-title {

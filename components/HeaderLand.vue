@@ -22,7 +22,7 @@
         <img class="logo pb-1" src="/logo.svg" alt="logo"/>
 
         <ul class=" lg:inline-flex hidden w-full ml-8 pl-5 mt-3 navHead-list">
-          <li class="header-link font-title hoverable" v-for="link in navLinks" :key="link.name">
+          <li class="header-link font-title hoverable" v-for="link in navLinks" :key="link.name" @click="goTo(link)">
             <a v-if="$route.path === '/'" class="hoverable" :href="link.url">{{ link.name }}</a>
             <nuxt-link v-else class="hoverable" :to="link.url">{{ link.name }}</nuxt-link>
           </li>
@@ -71,6 +71,12 @@ const savedStudent = useStorage('student',
       },
     },)
 const visible = ref(false)
+
+const goTo = (link) => {
+  if(width.value < 1200){
+    openMenu.value = false
+  }
+}
 
  const navLinks = [
   { name: 'Главная', url: '/#home' },

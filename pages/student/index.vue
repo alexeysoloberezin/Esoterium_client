@@ -9,10 +9,10 @@
         </RouterLink>
         <h1>Ваша статистика - {{ me?.email }}</h1>
         <div v-if="clients" class="grid">
-          <div class="col-3 p-2">
+          <div class="md:col-3 col-12 p-2">
             <Card class="border-primary border-1">
               <template #content>
-                <div class="flex align-items-center gap-2">
+                <div class="flex align-items-center gap-2 p-3">
                    <span
                        class="w-1rem h-2rem text-primary border-circle inline-flex justify-content-center align-items-center text-center">
                         <i class="pi pi-users"/>
@@ -23,10 +23,10 @@
               </template>
             </Card>
           </div>
-          <div class="col-3 p-2">
+          <div class="md:col-3 col-12 p-2">
             <Card class="border-primary border-1">
               <template #content>
-                <div class="flex align-items-center gap-2">
+                <div class="flex align-items-center gap-2 p-3">
                    <span
                        class="w-1rem h-2rem text-primary border-circle inline-flex justify-content-center align-items-center text-center">
                         <i class="pi pi-dollar"/>
@@ -37,10 +37,10 @@
               </template>
             </Card>
           </div>
-          <div class="col-3 p-2">
+          <div class="md:col-3 col-12 p-2">
             <Card class="border-primary border-1">
               <template #content>
-                <div class="flex align-items-center gap-2">
+                <div class="flex align-items-center gap-2 p-3">
                    <span
                        class="w-1rem h-2rem text-primary border-circle inline-flex justify-content-center align-items-center text-center">
                         <i class="pi pi-users"/>
@@ -51,10 +51,10 @@
               </template>
             </Card>
           </div>
-          <div  class="col-3 p-2">
+          <div  class="md:col-3 col-12 p-2">
             <Card class="border-primary border-1">
               <template #content>
-                <div class="flex align-items-center gap-2">
+                <div class="flex align-items-center gap-2 p-3">
                    <span
                        class="w-1rem h-2rem text-primary border-circle inline-flex justify-content-center align-items-center text-center">
                         <i class="pi pi-dollar"/>
@@ -67,7 +67,7 @@
           </div>
         </div>
         <div class="grid">
-          <div class="col-6 p-2">
+          <div class="md:col-6 col-12 p-2">
             <Card
                 class="student-card"
             >
