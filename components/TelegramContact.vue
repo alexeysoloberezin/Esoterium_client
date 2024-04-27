@@ -32,12 +32,18 @@ import Telegram from "@/components/icon/Telegram.vue";
 
 const props = defineProps<{
   telegram: string,
+  noAsk?: boolean,
   showClose?: boolean,
 }>()
 
 const emit = defineEmits(['update:close'])
 
 const closeContact = () => {
+  if(props.noAsk){
+    emit('update:close', false)
+    return
+  }
+
   const prompt = confirm('Вы уверены что хотите закрыть контакт? Сохраните контакт.')
 
   if(prompt){

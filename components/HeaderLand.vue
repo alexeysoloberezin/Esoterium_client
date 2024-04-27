@@ -14,6 +14,16 @@
     </nav>
     <StartLoading
     />
+
+    <div v-if="savedStudent" class="text-white">
+      <Button  @click="visible = true"  size="small" outlined class="hoverable px-3 mr-3" style="height: 40px">
+        <div>У&nbsp;вас&nbsp;есть&nbsp;доступный&nbsp;контакт</div>
+      </Button>
+
+      <Dialog v-model:visible="visible" modal :closable="false" class="successTelegramModal">
+        <TelegramContact :no-ask="true" :telegram="savedStudent.telegram" :show-close="true" @update:close="() => visible = false"/>
+      </Dialog>
+    </div>
     <div v-if="isAdmin" class="flex lg:mt-0 mt-2">
       <Button  to="/login" size="small" class="hoverable px-3" style="height: 40px">
         <div>Заказать&nbsp;услугу</div>
@@ -24,8 +34,12 @@
 <script setup lang="ts">
 import {ref} from "vue";
 import { onMounted, onUnmounted } from 'vue';
-import {useWindowSize} from "@vueuse/core";
+import {useLocalStorage, useWindowSize} from "@vueuse/core";
 import StartLoading from "@/components/StartLoading.vue";
+import TelegramContact from "@/components/TelegramContact.vue";
+
+const savedStudent = useLocalStorage('student', null)
+const visible = ref(false)
 
  const navLinks = [
   { name: 'Главная', url: '/#home' },

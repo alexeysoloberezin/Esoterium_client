@@ -87,7 +87,7 @@ onMounted(async () => {
   }
 
   localStorage.setItem('student', JSON.stringify(student))
-  telegram.value = student.telegram || 'test telegram'
+  telegram.value = student.telegram
   localStorage.removeItem('paymentToken')
   visible.value = true
   loading.value = false
@@ -95,14 +95,4 @@ onMounted(async () => {
 </script>
 
 <style lang="scss">
-.successTelegramModal {
-  width: 26rem;
-  border-radius: 15px;
-  overflow: hidden;
-  background: #000;
-
-  .p-dialog-content {
-    background: #434a72;
-  }
-}
 </style>

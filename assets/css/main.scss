@@ -231,4 +231,16 @@ body:after {
   background: linear-gradient(90deg, rgb(107, 105, 130, 0), rgb(107, 105, 130));
 }
 
+
+.successTelegramModal {
+  width: 26rem;
+  border-radius: 15px;
+  overflow: hidden;
+  background: #000;
+
+  .p-dialog-content {
+    background: #434a72;
+  }
+}
+
 @import "slider";
