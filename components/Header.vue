@@ -25,10 +25,10 @@
         </RouterLink>
       </template>
       <template #end>
-        <div class="flex align-items-center gap-2">
-          <InputText placeholder="Search" type="text" class="w-8rem sm:w-auto px-2 py-2 ml-2"/>
-          <Avatar image="https://primefaces.org/cdn/primevue/images/avatar/amyelsner.png" shape="circle"/>
-          <RouterLink to="/auth/logout">
+        <div class="flex align-items-center gap-2 ml-auto">
+<!--          <InputText placeholder="Search" type="text" class="w-8rem sm:w-auto px-2 py-2 ml-2"/>-->
+<!--          <Avatar image="https://primefaces.org/cdn/primevue/images/avatar/amyelsner.png" shape="circle"/>-->
+          <RouterLink to="/auth/logout" class="ml-auto">
             <Button class="p-2">
               Выход
             </Button>

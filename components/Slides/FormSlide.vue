@@ -38,7 +38,6 @@ const form = ref({
 const loading = ref(false)
 
 const pay = async () => {
-  console.log('pay')
   loading.value = true
   try {
     localStorage.removeItem('paymentToken')

@@ -77,9 +77,14 @@ const studentData = ref({
 })
 
 const fetchStudents = async () => {
-  const { data } = await useApi('/auth/students', {
+  const { data, error } = await useApi('/auth/students', {
     method: 'get'
   })
+
+  if(error.value){
+    useNuxtApp().$toast.error(error.value?.data?.message || error.value.message || 'Ошибка')
+  }
+
   if (data.value) {
     students.value = data.value
   }
@@ -95,6 +100,10 @@ const addStudent = async () => {
     body: studentData.value,
   })
 
+  if(error.value){
+    useNuxtApp().$toast.error(error.value?.data?.message || error.value.message || 'Ошибка')
+  }
+
   if(status.value === 'success'){
     visible.value = false
     studentData.value = {
@@ -102,8 +111,6 @@ const addStudent = async () => {
       password: ''
     }
     await fetchStudents()
-  }else if(status.value === 'error'){
-    useNuxtApp().$toast.error(error.value.data.message || 'Ошибка')
   }
 }
 

@@ -16,18 +16,36 @@ h1 {
   line-height: 1.4;
   margin-bottom: 15px;
   text-shadow: 1px 1px 8px rgba($primary, .38);
+  @media (max-width: 1200px) {
+    font-size: 34px;
+  }
+  @media (max-width: 800px) {
+    font-size: 29px;
+    margin-bottom: 10px;
+    line-height: 1.3;
+  }
 }
+
 
 h5 {
   font-size: 18px;
   line-height: 1.5;
   font-weight: 300;
+  @media (max-width: 1200px) {
+    font-size: 16px;
+  }
 }
 
 p {
   font-size: 18px;
   line-height: 1.55;
-  font-weight: 300
+  font-weight: 300;
+  @media (max-width: 1200px) {
+    font-size: 16px;
+  }
+  @media (max-width: 600px) {
+    font-size: 14px;
+  }
 }
 
 body, * {
@@ -41,6 +59,9 @@ body {
   box-sizing: border-box;
   height: 100vh;
   overflow: hidden;
+  @media (max-width: 1200px) {
+    font-size: 15px;
+  }
 }
 
 .container {
@@ -67,14 +88,23 @@ body:after {
   color: #fff;
   min-height: 100vh;
   padding: 100px 0;
+  @media (max-width: 1200px) {
+    padding: 60px 0;
+  }
 }
 
 .mainSlide {
   @media (max-width: 1700px) and (min-width: 1000px) {
     padding-left: 110px;
   }
-  @media (max-width: 1000px) {
+  @media (max-width: 1200px) {
+    padding-left: 65px;
+  }
+  @media (max-width: 1024px) {
     padding-left: 20px;
+  }
+  @media (max-width: 600px) {
+    padding-left: 0;
   }
 }
 
@@ -85,13 +115,16 @@ body:after {
   opacity: 0.1;
   pointer-events: none; /* Позволяет кликам проходить сквозь элемент */
 }
-.p-button{
+
+.p-button {
   padding: 0.4rem 0.9rem;
 }
-.p-inputtext{
+
+.p-inputtext {
   height: 34px;
-  padding-left: 10px;
+  padding: 7px 12px;
 }
+
 .Land:after {
   top: 0vh;
   right: 0vw;
@@ -121,6 +154,9 @@ body:after {
   opacity: 0.1;
   pointer-events: none;
   background: #fff;
+  @media (max-width: 800px) {
+    opacity: 0.03;
+  }
 }
 
 .Land-line-1 {
@@ -148,6 +184,15 @@ body:after {
   opacity: 0;
   transition: .4s;
   transition-delay: .3s;
+  @media (max-width: 1200px) {
+    max-width: 55vw;
+  }
+  @media (max-width: 800px) {
+    max-width: 65vw;
+  }
+  @media (max-width: 600px) {
+    max-width: 100%;
+  }
 
   p {
     max-width: 600px;
@@ -160,11 +205,22 @@ body:after {
 
 .container_box {
   margin-bottom: 50px;
+  @media (max-width: 1200px) {
+    margin-bottom: 25px;
+  }
 }
 
 .just-list {
   li {
     margin-bottom: 13px;
+    @media (max-width: 500px) {
+      font-size: 13px;
+      margin-bottom: 9px;
+      b {
+        letter-spacing: 0.2px;
+        font-size: 14px !important;
+      }
+    }
   }
 }
 
@@ -203,16 +259,17 @@ body:after {
 }
 
 
-
-.loginPage{
+.loginPage {
   min-height: 100vh;
   padding: 210px 0 80px;
 }
-.loginPage-image{
+
+.loginPage-image {
   position: relative;
   opacity: .6;
 }
-.loginPage-image:after{
+
+.loginPage-image:after {
   content: '';
   position: absolute;
   top: 0;
@@ -221,7 +278,8 @@ body:after {
   height: 100%;
   background: linear-gradient(-90deg, rgb(107, 105, 130, 0), rgb(107, 105, 130));
 }
-.loginPage-image:before{
+
+.loginPage-image:before {
   content: '';
   position: absolute;
   top: 0;
@@ -241,6 +299,22 @@ body:after {
   .p-dialog-content {
     background: #434a72;
   }
+}
+
+.p-column-header-content {
+  padding: 9px;
+}
+
+.p-paginator-bottom {
+  padding: 10px;
+}
+
+.p-message-wrapper {
+  padding: 10px;
+}
+
+.p-message-icon {
+  padding-right: 5px;
 }
 
 @import "slider";

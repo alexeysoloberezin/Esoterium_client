@@ -158,7 +158,8 @@ const cameraRotate = [
 
 // Функция обновления размеров камеры и рендерера
 function updateSize() {
-  const width = window.innerWidth * 0.6; // 30% от ширины окна
+
+  const width = window.innerWidth > 800 ? window.innerWidth * 0.6 : window.innerWidth ; // 30% от ширины окна
   const height = window.innerHeight * 1; // 50% от высоты окна
   camera.aspect = width / height;
   camera.updateProjectionMatrix();
@@ -273,6 +274,7 @@ function init() {
       '/assets/sc.glb',
       '/assets/scene2.glb',
       '/assets/scene3.glb',
+      '/assets/test1.glb'
   ]
 
   loader.load(links[2], (gltf) => {
@@ -282,7 +284,6 @@ function init() {
     model.position.y = -2 // Сдвиг модели вправо на сцене
 
 
-    console.log('model', model)
     var spiral = model.getObjectByName('Spiral002');
 
     var glowingMaterial = new THREE.MeshPhongMaterial({
@@ -306,11 +307,25 @@ function init() {
   camera.position.set(0, 0, 5);
 }
 
+let end = false
+
 async function animateModel() {
   animationId = requestAnimationFrame(animateModel);
 
   if (model) {
-    model.rotation.y += 0.00035;
+    model.rotation.y += 0.0004;
+  }
+
+  if(model.children[1].rotation.y > 2){
+    end = true
+  }else if(model.children[1].rotation.y < 0.2){
+    end = false
+  }
+
+  if(end){
+    model.children[1].rotation.y += -0.003
+  }else{
+    model.children[1].rotation.y += +0.003
   }
 
   await renderer.render(scene, camera);
@@ -350,14 +365,24 @@ function updateCameraPosition(index) {
 }
 </script>
 
-<style>
+<style lang="scss">
 .three-js-container {
   position: absolute;
   background: transparent;
   top: 50%;
   right: 0;
   transform: translate(0, -50%);
-  /*border: 1px solid #ccc; !* Для наглядности *!*/
+  
+  @media (max-width: 1200px) {
+    opacity: 0.75;
+    transform: translate(0, -50%) scale(0.85);
+    transform-origin: right;
+  }
+  @media (max-width: 800px) {
+    opacity: 0.28;
+    transform: translate(0, -50%) scale(0.6);
+    transform-origin: right;
+  }
 }
 
 
@@ -420,13 +445,14 @@ function updateCameraPosition(index) {
 
 @media (max-width: 1024px) {
   .my-swiper > .swiper-pagination {
-    position: relative !important;
-    left: initial !important;
+    position: fixed !important;
+    left: 50% !important;
+    transform: translateX(-50%);
     right: initial !important;
     top: initial !important;
     width: fit-content;
     margin: 0 auto;
-    bottom: 0px !important;
+    bottom: 50px !important;
     z-index: 102;
     display: flex;
   }

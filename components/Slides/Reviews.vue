@@ -10,7 +10,7 @@
         <SliderCards :slidesPerView="1.03"
                      :spaceBetween="20"
                      :breakPoints="{
-                    '700': {
+                    '900': {
                         slidesPerView: 2,
                         spaceBetween: 24,
                       }}
