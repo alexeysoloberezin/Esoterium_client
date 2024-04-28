@@ -3,6 +3,7 @@
     <div class="">
       <div class="container_wrp">
         <h1 :style="getDelay(1)">Готовы узнать больше о себе?<br/></h1>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. In, nesciunt.</p>
 
         <form class="relative z-5 p-4 shadow-2 form bg-card border-round  w-full"
               style="max-width: 700px">
@@ -31,7 +32,7 @@ import {useNuxtApp} from "nuxt/app";
 import {onMounted} from "vue";
 
 const form = ref({
-  email: 'test@gmail.com',
+  email: '',
   phone: '',
 })
 
