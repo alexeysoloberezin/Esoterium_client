@@ -30,7 +30,7 @@
               <div v-if="slotProps.data.paymentNumber && slotProps.data.paymentType && slotProps.data.telegram"
                 style="color: #18d030"
               >
-                Verified
+                Verifiedg
               </div>
               <div class="" style="color: #ec4899">
                 Не полные данные!
