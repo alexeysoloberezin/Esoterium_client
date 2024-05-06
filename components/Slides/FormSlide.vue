@@ -2,10 +2,14 @@
   <div class="container">
     <div class="">
       <div class="container_wrp">
-        <h1 :style="getDelay(1)">Готовы узнать больше о себе?<br/></h1>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. In, nesciunt.</p>
+        <h1 :style="getDelay(1)"> Готовы узнать всё о себе, своём будущем и исполнить все свои мечты?<br/></h1>
+        <p style="font-size: 15px">Стоимость диагностики всех сфер жизни по ладони <b><i>7500₽</i></b>, коррекция всех сфер жизни также
+          <b><i>7500₽</i></b>, при покупке
+          комбо Диагностика+Коррекция вы получите приятный подарок!
+        </p>
+        <p class="pt-2" style="font-size: 15px">Возможна оплата в рассрочку от банка без переплат и первоначального взноса.</p>
 
-        <form class="relative z-5 p-4 shadow-2 form bg-card border-round  w-full"
+        <form class="relative z-5 p-4 shadow-2 form bg-card border-round  w-full mt-3"
               style="max-width: 700px">
           <div>
             <label for="em" class="block  font-medium mb-2">Почта</label>
@@ -51,9 +55,9 @@ const pay = async () => {
     if (error.value) {
       if (Array.isArray(error.value.data.message) && error.value.data.message.length) {
         useNuxtApp().$toast?.error(error.value.data.message.join('\n----\n'))
-      } else if(error.value?.data?.message){
+      } else if (error.value?.data?.message) {
         useNuxtApp().$toast?.error(error.value.data.message)
-      }else{
+      } else {
         useNuxtApp().$toast?.error('Ошибка')
       }
       loading.value = false

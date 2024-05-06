@@ -2,7 +2,7 @@
   <div class="reviewUi-box">
     <div class="reviewUi bg-card flex flex-col py-[38px] px-[30px] rounded-xl shadow-sm  lg:min-h-[336px]">
       <div class="flex gap-3 w-full">
-        <div class="p-[1px] relative rounded-full bg-gradient-to-r from-secondary to-primary ">
+        <div v-if="false" class="p-[1px] relative rounded-full bg-gradient-to-r from-secondary to-primary ">
           <Instagramm class="absolute top-0 left-0"/>
           <img class=" reviewUi-image object-cover border-white rounded-full" :src="image"/>
         </div>
@@ -16,7 +16,7 @@
           <Quotes/>
         </div>
       </div>
-      <p class="reviewUi-text mt-9 mb-[30px] min-h-[60px]">
+      <p class="reviewUi-text sm:mt-9 mt-3 mb-[30px] min-h-[60px]">
         {{
           text
         }}
@@ -79,7 +79,9 @@ const {number, date, drop, image, tag, text, lost} = defineProps({
   flex-direction: column;
   padding: 38px 30px;
   min-height: 336px; // Применяется только на больших экранах (lg)
-
+  @media (max-width: 1000px) {
+    padding: 25px 18px;
+  }
   &-image{
     width: 55px;
     height: 55px;
@@ -149,6 +151,9 @@ const {number, date, drop, image, tag, text, lost} = defineProps({
   &-text{
     font-size: 16px;
     margin-bottom: 15px;
+    @media (max-width: 1000px) {
+      font-size: 14px;
+    }
   }
 
   .items-center {

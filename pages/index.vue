@@ -10,25 +10,29 @@
     <swiper
         :effect="'fade'"
         :speed="1200"
-        :autoHeight="true"
+        :autoHeight="false"
         :longSwipesMs="1200"
         :hashNavigation="{
           watchState: true,
         }"
+        :direction="'vertical'"
         :pagination="{
-        clickable: true,
-        type: 'bullets'
-      }"
-        :allowTouchMove="false"
-        :mousewheel="false"
+          clickable: true,
+          type: 'bullets'
+        }"
+        :freeMode="true"
+        :scrollbar="true"
+        :allowTouchMove="true"
+        :mousewheel="true"
         ref="mySwiper"
         @slideChange="onSlideChange"
         class="my-swiper sm:h-screen"
         :class="isFirst ? '' : 'pagination-upper'"
         :breakpoints="{
         1000: {
-          direction: 'vertical',
-          autoHeight: false,
+          mousewheel: false,
+          freeMode: false,
+          scrollbar: false,
           allowTouchMove: false,
         }
       }"
@@ -39,6 +43,8 @@
         />
       </swiper-slide>
     </swiper>
+
+    <MobilePage/>
   </div>
 
 
@@ -59,7 +65,7 @@
 <script setup>
 import {Swiper, SwiperSlide, useSwiper} from 'swiper/vue';
 import 'swiper/swiper-bundle.css';
-import SwiperCore, {Mousewheel, Pagination, HashNavigation} from 'swiper';
+import SwiperCore, {Mousewheel, Pagination, FreeMode, Scrollbar, HashNavigation} from 'swiper';
 import {computed, onMounted, onUnmounted, ref} from 'vue';
 import * as THREE from 'three';
 import {GLTFLoader} from 'three/addons/loaders/GLTFLoader.js';
@@ -70,9 +76,12 @@ import Reviews from '@/components/Slides/Reviews.vue';
 import FormSlide from '@/components/Slides/FormSlide.vue';
 import HeaderLand from "../components/HeaderLand.vue";
 import CursorCircle from "../components/CursorCircle.vue";
+import HowItsWork from '../components/Slides/HowItsWork.vue'
 import gsap from 'gsap';
+import MobilePage from "../components/MobilePage.vue";
+import Correct from '../components/Slides/Correct.vue'
 
-SwiperCore.use([Pagination, Mousewheel, HashNavigation]);
+SwiperCore.use([Pagination, Mousewheel, HashNavigation, FreeMode, Scrollbar]);
 
 const threeContainer = ref(null);
 let scene, camera, renderer, model, animationId;
@@ -125,7 +134,7 @@ const cameraRotate = [
       z: 0,
     },
     l1: [9, 7, 3],
-    l2: [4,-2,9],
+    l2: [4, -2, 9],
     l3: [-3, -5, -4],
   },
   {
@@ -158,8 +167,7 @@ const cameraRotate = [
 
 // Функция обновления размеров камеры и рендерера
 function updateSize() {
-
-  const width = window.innerWidth > 800 ? window.innerWidth * 0.6 : window.innerWidth ; // 30% от ширины окна
+  const width = window.innerWidth > 800 ? window.innerWidth * 0.6 : window.innerWidth; // 30% от ширины окна
   const height = window.innerHeight * 1; // 50% от высоты окна
   camera.aspect = width / height;
   camera.updateProjectionMatrix();
@@ -177,6 +185,14 @@ const slides = [
   },
   {
     component: WhyWe,
+    hash: "whywe",
+  },
+  {
+    component: HowItsWork,
+    hash: "howItsWork",
+  },
+  {
+    component: Correct,
     hash: "whywe",
   },
   {
@@ -269,12 +285,12 @@ function init() {
   // loader.load('', (gltf) => {
 
   const links = [
-      'rhetorician/scene.gltf',
-      '/the_thinker_by_auguste_rodin/scene.gltf',
-      '/assets/sc.glb',
-      '/assets/scene2.glb',
-      '/assets/scene3.glb',
-      '/assets/test1.glb'
+    'rhetorician/scene.gltf',
+    '/the_thinker_by_auguste_rodin/scene.gltf',
+    '/assets/sc.glb',
+    '/assets/scene2.glb',
+    '/assets/scene3.glb',
+    '/assets/test1.glb'
   ]
 
   loader.load(links[2], (gltf) => {
@@ -293,13 +309,12 @@ function init() {
     });
 
     // console.log('spiral', spiral)
-    if(spiral){
+    if (spiral) {
       spiral.material = glowingMaterial;
     }
 
     scene.add(model);
   });
-
 
 
   // Установка позиции камеры
@@ -316,16 +331,16 @@ async function animateModel() {
     model.rotation.y += 0.0004;
   }
 
-  if(Array.isArray(model.children) && model.children.length > 0){
-    if(model.children[1].rotation.y > 2){
+  if (Array.isArray(model.children) && model.children.length > 0) {
+    if (model.children[1].rotation.y > 2) {
       end = true
-    }else if(model.children[1].rotation.y < 0.2){
+    } else if (model.children[1].rotation.y < 0.2) {
       end = false
     }
 
-    if(end){
+    if (end) {
       model.children[1].rotation.y += -0.003
-    }else{
+    } else {
       model.children[1].rotation.y += +0.003
     }
   }
@@ -374,15 +389,16 @@ function updateCameraPosition(index) {
   top: 50%;
   right: 0;
   transform: translate(0, -50%);
-  
+
   @media (max-width: 1200px) {
     opacity: 0.75;
     transform: translate(0, -50%) scale(0.85);
     transform-origin: right;
   }
-  @media (max-width: 800px) {
+  @media (max-width: 1000px) {
+    position: fixed;
     opacity: 0.28;
-    transform: translate(0, -50%) scale(0.6);
+    transform: translate(0, -30%) scale(0.6);
     transform-origin: right;
   }
 }
@@ -399,6 +415,9 @@ function updateCameraPosition(index) {
   opacity: 0.15;
   color: #b03eea;
   z-index: 1;
+  @media (max-width: 1000px) {
+    display: none;
+  }
 }
 
 @media (max-width: 1400px) or (max-height: 800px) {
@@ -469,4 +488,10 @@ function updateCameraPosition(index) {
   transform: translate(-50%, -50%);
 }
 
+.my-swiper {
+  @media (max-width: 1000px) {
+    display: none;
+
+  }
+}
 </style>

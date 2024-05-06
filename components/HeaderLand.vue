@@ -21,7 +21,7 @@
       <div class="flex  items-center w-full navHead-wrp">
         <img class="logo pb-1" src="/logo.svg" alt="logo"/>
 
-        <ul class=" lg:inline-flex hidden w-full ml-8 pl-5 mt-3 navHead-list">
+        <ul class=" lg:inline-flex hidden w-full ml-3 pl-5 mt-3 navHead-list">
           <li class="header-link font-title hoverable" v-for="link in navLinks" :key="link.name" @click="goTo(link)">
             <a v-if="$route.path === '/'" class="hoverable" :href="link.url">{{ link.name }}</a>
             <nuxt-link v-else class="hoverable" :to="link.url">{{ link.name }}</nuxt-link>
@@ -81,9 +81,10 @@ const goTo = (link) => {
  const navLinks = [
   { name: 'Главная', url: '/#home' },
   { name: 'О нас', url: '/#about' },
-  // { name: 'Sanita App', url: '#' },
   { name: 'Почему мы', url: '/#whywe' },
-  // { name: 'Blog', url: '/#blog' },
+  // { name: 'Sanita App', url: '#' },
+   { name: 'Как это работает', url: '/#howItsWork' },
+   // { name: 'Blog', url: '/#blog' },
   { name: 'Отзывы', url: '/#reviews' },
   { name: 'Заказать услугу', url: '/#form' },
 ];
@@ -201,7 +202,7 @@ onUnmounted(() => {
         text-align: center;
       }
       a{
-        padding: 15px;
+        padding: 15px 10px;
         display: block;
         width: 100%;
       }

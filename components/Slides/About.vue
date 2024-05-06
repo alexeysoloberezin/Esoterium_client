@@ -1,33 +1,27 @@
 <template>
   <div class="container">
     <div class="slide1 ">
-      <div  class="container_wrp">
+      <div class="container_wrp">
         <div class="container_box">
           <h1 class="animate-show" :style="getDelay(1)">О нас</h1>
           <p class="animate-show" :style="getDelay(2)">
-            Мы в
-            <b class="font-title ttu">Esoterium</b>
-            верим, что хиромантия – это искусство и наука, раскрывающая скрытые аспекты вашей личности и судьбы. Наша
-            платформа соединяет вас с профессиональными хиромантами, которые прошли строгую проверку и подтверждение их
-            навыков и опыта. Здесь вы найдете не только гадания, но и глубокое понимание своих сил и возможностей.
+            Мы в <b><i>ESOTERIUM</i></b> доказали, что хиромантия - это наука, раскрывающая аспекты вашей личности и
+            судьбы, на основе
+            глубокого анализа линий и знаков на ладони. Всё это работает, благодаря сильнейшей связи нашего мозга и рук,
+            подробнее об этом смотрите в видео. Также в конце видео я подготовила в подарок простейшую, но
+            результативную практику изобилия!
           </p>
-        </div>
+          <a class="my-3 block animate-show" target="_blank" :style="getDelay(3)"
+             href="https://www.youtube.com/watch?v=Tjhnfsffs3M">
+            <YoutubeButton/>
+          </a>
+          <p class="animate-show pt-2" :style="getDelay(2)">
+            Наша платформа соединяет вас с профессиональными хиромантами, которые прошли строгую проверку и
+            подтверждение их навыков и опыта. Здесь вы найдете прогноз и анализ прошлого, настоящего и будущего,а также
+            глубокие осознания и понимание своих сил и возможностей.
+          </p>
 
-        <div class="container_box">
-          <h1 class="animate-show" :style="getDelay(3)">Как это работает?</h1>
-          <ul class="just-list">
-            <li class="animate-show" :style="getDelay(4)"><b class="font-title text-lg">Создайте аккаунт -</b>
-              Регистрация проста и займет всего несколько минут.
-            </li>
-            <li class="animate-show" :style="getDelay(5)"><b class="font-title text-lg">Выберите хироманта -</b> Просмотрите профили, отзывы и рейтинги наших экспертов.
-            </li>
-            <li class="animate-show" :style="getDelay(6)"><b class="font-title text-lg">Запишитесь на консультацию -</b> Выберите удобное для вас время и забронируйте
-              сеанс.
-            </li>
-            <li class="animate-show" :style="getDelay(7)"><b class="font-title text-lg">Получите ваше чтение -</b> Встречайтесь с вашим хиромантом онлайн и исследуйте
-              загадки ваших ладоней.
-            </li>
-          </ul>
+
         </div>
       </div>
     </div>
@@ -37,8 +31,9 @@
 <script setup lang="ts">
 import {computed, onMounted} from "vue";
 import {useAnimate} from "@/composables/useAnimate";
+import YoutubeButton from "@/components/YoutubeButton.vue";
 
-const { getDelay } = useAnimate({})
+const {getDelay} = useAnimate({})
 
 </script>
 

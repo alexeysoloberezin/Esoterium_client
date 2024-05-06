@@ -11,13 +11,29 @@
           <li class="animate-show" :style="getDelay(3)"><b class="font-title text-lg">Конфиденциальность и безопасность:</b>
             Ваши личные данные и сеансы конфиденциальны и защищены.
           </li>
-          <li class="animate-show" :style="getDelay(4)"><b class="font-title text-lg">Гибкость и удобство:</b>
-            Доступ к чтению ладоней из любой точки мира в любое время.
+          <li class="animate-show" :style="getDelay(4)"><b class="font-title text-lg">Комфорт и качество:</b>
+            мы вполняем и высылаем вам интереснейшую ВИДЕОдиагностику с подробным объяснением всех линий и знаков.
           </li>
           <li class="animate-show" :style="getDelay(5)"><b class="font-title text-lg">Удовлетворенность гарантирована:</b>
-            Мы гарантируем качество каждой консультации.
+            Только у нас вы можете увидеть 100% положительных отзывов! Если вы останетесь недовольны услугой - мы вернём вам деньги.
+          </li>
+          <li  class="animate-show" :style="getDelay(5)">
+            <b class="font-title text-lg">Обратная связь:</b>
+            вы сможете задать любые интересующие вопросы своему специалисту и получить развёрнутый ответ.
           </li>
         </ul>
+
+        <div class="sm:flex">
+          <div class="sm:col-4">
+            <Image class=" img-example" src="/hands/IMG_9567.jpg" alt="Image"  preview />
+          </div>
+          <div class="sm:col-4">
+            <Image class=" img-example" src="/hands/IMG_9839.jpg" alt="Image"  preview />
+          </div>
+          <div class="sm:col-4">
+            <Image class=" img-example" src="/hands/IMG_9840.jpg" alt="Image"  preview />
+          </div>
+        </div>
       </div>
     </div>
   </div>

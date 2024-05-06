@@ -3,12 +3,12 @@
 </template>
 
 <script setup lang="ts">
-// definePageMeta({
+definePageMeta({
 
-//   middleware: [
-//     'admin',
-//   ],
-// });
+  middleware: [
+    'admin',
+  ],
+});
 </script>
 
 <style scoped>
