@@ -15,7 +15,7 @@
       <Column header="Доход" >
         <template #body="slotProps">
           <div>
-            <Tag severity="success" value="Success">+500 ₽</Tag>
+            <Tag severity="success" value="Success">+7500 ₽</Tag>
           </div>
         </template>
       </Column>
