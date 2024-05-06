@@ -50,8 +50,8 @@ const onSubmit = async () => {
 }
 
 const form = ref({
-  email: 'test@gmail.com',
-  password: '123'
+  email: '',
+  password: ''
 })
 </script>
 

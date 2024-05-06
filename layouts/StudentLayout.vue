@@ -4,7 +4,6 @@
 
 <script setup lang="ts">
 definePageMeta({
-
   middleware: [
     'student',
   ],
