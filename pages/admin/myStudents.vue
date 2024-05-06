@@ -25,6 +25,18 @@
                    tableStyle="min-width: 50rem">
           <Column field="email" header="Почта" ></Column>
           <Column field="queue" header="Клиентов" ></Column>
+          <Column field="verified" header="Все данные есть" >
+            <template #body="slotProps">
+              <div v-if="slotProps.data.paymentNumber && slotProps.data.paymentType && slotProps.data.telegram"
+                style="color: #18d030"
+              >
+                Verified
+              </div>
+              <div class="" style="color: #ec4899">
+                Не полные данные!
+              </div>
+            </template>
+          </Column>
           <Column  header="Клиентов" >
             <template #body="slotProps">
               {{ slotProps.data.clients.length }}
