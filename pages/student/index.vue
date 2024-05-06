@@ -9,7 +9,7 @@
         </RouterLink>
         <h1>Ваша статистика - {{ me?.email }}</h1>
         <div v-if="clients" class="grid">
-          <div class="md:col-3 col-12 p-2">
+          <div class="lg:col-3 md:col-6 col-12 p-2">
             <Card class="border-primary border-1">
               <template #content>
                 <div class="flex align-items-center gap-2 p-3">
@@ -18,7 +18,7 @@
                         <i class="pi pi-users"/>
                     </span>
                   <span class="text-secondary font-semibold line-height-2 text-sm">Количество заказов:</span>
-                  <span class="font-bold text-primary text-xl">{{ clients?.length }} шт.</span>
+                  <span class="font-bold text-primary text-lg">{{ clients?.length }} шт.</span>
                 </div>
               </template>
             </Card>
@@ -32,7 +32,7 @@
                         <i class="pi pi-dollar"/>
                     </span>
                   <span class="text-secondary font-semibold line-height-2 text-sm">Заработано в этом месяце:</span>
-                  <span class="font-bold text-primary text-xl">{{ clientsInThisMonth?.length * pricePerClient }} ₽</span>
+                  <span class="font-bold text-primary text-lg">{{ clientsInThisMonth?.length * pricePerClient }} ₽</span>
                 </div>
               </template>
             </Card>
@@ -46,7 +46,7 @@
                         <i class="pi pi-users"/>
                     </span>
                   <span class="text-secondary font-semibold line-height-2 text-sm">Количество заказов в этом месяце:</span>
-                  <span class="font-bold text-primary text-xl">{{ clientsInThisMonth?.length }} шт.</span>
+                  <span class="font-bold text-primary text-lg">{{ clientsInThisMonth?.length }} шт.</span>
                 </div>
               </template>
             </Card>
@@ -60,7 +60,7 @@
                         <i class="pi pi-dollar"/>
                     </span>
                   <span class="text-secondary font-semibold line-height-2 text-sm">Заработано за всё время:</span>
-                  <span class="font-bold text-primary text-xl">{{ clients.length * pricePerClient }} ₽</span>
+                  <span class="font-bold text-primary text-lg">{{ clients.length * pricePerClient }} ₽</span>
                 </div>
               </template>
             </Card>
@@ -121,7 +121,7 @@ const {data: me} = useApi('auth/me', {
   method: 'get'
 })
 
-const pricePerClient = 500
+const pricePerClient = 7500
 
 const clientsInThisMonth = computed(() => {
   const arr: any = clients.value || []
