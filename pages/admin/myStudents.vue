@@ -24,7 +24,12 @@
         <DataTable :value="students" paginator :rows="15" :rowsPerPageOptions="[5, 10, 20, 50]"
                    tableStyle="min-width: 50rem">
           <Column field="email" header="Почта" ></Column>
-          <Column field="queue" header="Клиентов" ></Column>
+          <Column field="queue" header="Первый + следующий" >
+            <template #body="slotProps">
+              {{ slotProps.data.queue ? '+' : "-" }}
+              <!--              {{ slotProps.data.clients.map(el => el.name).join(' / ') }}-->
+            </template>
+          </Column>
           <Column field="verified" header="Все данные есть" >
             <template #body="slotProps">
               <div v-if="slotProps.data.paymentNumber && slotProps.data.paymentType && slotProps.data.telegram"
