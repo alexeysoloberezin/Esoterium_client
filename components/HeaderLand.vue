@@ -1,14 +1,14 @@
 <template>
   <div :class="{'hidden-header': !isHeaderVisible}" class="header flex fixed top-0 z-[2000] left-0 w-full h-[100px]  items-center justify-between lg:pr-10 pr-5 lg:pl-10">
-    <div v-if="width < 1200" @click="openMenu = !openMenu" style="width: 30px" class="cursor-pointer mr-2">
-      <svg style="width: 30px;height:30px" fill="#fff" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="100" height="100" viewBox="0 0 50 50">
-        <path d="M 3 8 A 2.0002 2.0002 0 1 0 3 12 L 47 12 A 2.0002 2.0002 0 1 0 47 8 L 3 8 z M 3 23 A 2.0002 2.0002 0 1 0 3 27 L 47 27 A 2.0002 2.0002 0 1 0 47 23 L 3 23 z M 3 38 A 2.0002 2.0002 0 1 0 3 42 L 47 42 A 2.0002 2.0002 0 1 0 47 38 L 3 38 z"></path>
-      </svg>
-    </div>
+<!--    <div v-if="width < 1200" @click="openMenu = !openMenu" style="width: 30px" class="cursor-pointer mr-2">-->
+<!--      <svg style="width: 30px;height:30px" fill="#fff" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="100" height="100" viewBox="0 0 50 50">-->
+<!--        <path d="M 3 8 A 2.0002 2.0002 0 1 0 3 12 L 47 12 A 2.0002 2.0002 0 1 0 47 8 L 3 8 z M 3 23 A 2.0002 2.0002 0 1 0 3 27 L 47 27 A 2.0002 2.0002 0 1 0 47 23 L 3 23 z M 3 38 A 2.0002 2.0002 0 1 0 3 42 L 47 42 A 2.0002 2.0002 0 1 0 47 38 L 3 38 z"></path>-->
+<!--      </svg>-->
+<!--    </div>-->
 
 
     <div class="mobLogo mr-auto">
-      <img class="logo pb-1" src="/logo.svg" alt="logo"/>
+      <img class="logo pb-1 mt-2" src="/logo.svg" alt="logo"/>
     </div>
 
     <div class="navHead-overlay" :class="{'active': openMenu}">
@@ -46,7 +46,7 @@
       <a href="/#form">
         <Button size="small" class="hoverable px-3" style="height: 40px">
           <div v-if="width > 1200">Заказать&nbsp;услугу</div>
-          <div v-else>Заказать</div>
+          <div v-else @click="scroll">Заказать</div>
         </Button>
       </a>
 
@@ -116,6 +116,13 @@ onUnmounted(() => {
   window.removeEventListener('scroll', handleScroll);
 });
 
+
+const scroll = () => {
+  window.scrollTo({
+    top: document.body.scrollHeight,
+    behavior: 'smooth'
+  });
+}
 </script>
 
 <style lang="scss">

@@ -6,6 +6,7 @@
           Добавить ученика
         </Button>
 
+
         <Dialog v-model:visible="visible" class="p-3" modal header="Добавить ученика" :style="{ width: '25rem' }">
           <div class="flex align-items-center gap-3 mb-3 mt-3">
             <label for="username" class="font-semibold w-6rem">Почта</label>
@@ -69,6 +70,10 @@
             </template>
           </Column>
         </DataTable>
+
+        <Button outlined @click="deleteAll" class="my-3">
+          Удалить всю историю клиентов
+        </Button>
       </div>
     </MainLayout>
   </AdminLayout>
@@ -92,6 +97,26 @@ const studentData = ref({
   email: '',
   password: ''
 })
+
+const deleteAll = async () => {
+  const confirm = window.confirm('Удалить всю историю!!')
+
+  if(!confirm){
+    return
+  }
+
+  const { data, error } = await useApi('/client/restartClients', {
+    method: 'post'
+  })
+
+  if(error.value){
+    useNuxtApp().$toast.error(error.value?.data?.message || error.value.message || 'Ошибка')
+  }
+
+  if (data.value) {
+    await fetchStudents()
+  }
+}
 
 const fetchStudents = async () => {
   const { data, error } = await useApi('/auth/students', {
