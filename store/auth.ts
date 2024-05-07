@@ -27,6 +27,9 @@ export const useAuthStore = defineStore('authStore', () => {
         body
       })
 
+      console.log('data', data)
+      console.log('status', status)
+      console.log('error', error)
       if (status.value === 'success') {
         console.log('asd', data)
         // toast.success('Successfully login in');
@@ -43,6 +46,7 @@ export const useAuthStore = defineStore('authStore', () => {
         useNuxtApp().$toast.error(error.value?.data?.message || 'Ошибка входа');
       }
     } catch ({response}) {
+      console.log('response', response)
       useNuxtApp().$toast.error('Серверная Ошибка входа');
     } finally {
       loading.value = false
