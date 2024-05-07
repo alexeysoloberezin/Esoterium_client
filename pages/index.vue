@@ -331,7 +331,7 @@ async function animateModel() {
     model.rotation.y += 0.0004;
   }
 
-  if (Array.isArray(model.children) && model.children.length > 0) {
+  if (Array.isArray(model?.children) && model?.children?.length > 0) {
     if (model.children[1].rotation.y > 2) {
       end = true
     } else if (model.children[1].rotation.y < 0.2) {
