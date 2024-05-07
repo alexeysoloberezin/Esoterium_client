@@ -365,7 +365,6 @@ const onSlideChange = (data) => {
 
 function updateCameraPosition(index) {
   if (!camera || !camera.position || !model) {
-    console.error('Camera is not initialized');
     return; // Выход из функции, если камера не инициализирована
   }
   // Плавный переход к новой позиции

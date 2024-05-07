@@ -7,9 +7,12 @@
     </template>
     <template #title class="">
       <div class="flex items-center  gap-2">
-<!--        <Avatar label="U" shape="circle" class="flex-shrink-0"/>-->
+        <!--        <Avatar label="U" shape="circle" class="flex-shrink-0"/>-->
         <span class="telegramContact-title block pt-1">
-         Ваш контакт: {{ telegram }}
+         Ваш контакт:
+          <span class="block" style="white-space:break-spaces">
+            {{ telegram }}
+          </span>
       </span>
       </div>
 
@@ -39,14 +42,14 @@ const props = defineProps<{
 const emit = defineEmits(['update:close'])
 
 const closeContact = () => {
-  if(props.noAsk){
+  if (props.noAsk) {
     emit('update:close', false)
     return
   }
 
   const prompt = confirm('Вы уверены что хотите закрыть контакт? Сохраните контакт.')
 
-  if(prompt){
+  if (prompt) {
     emit('update:close', false)
   }
 }
@@ -69,11 +72,13 @@ const closeContact = () => {
   &-btn {
     background: #24A1DE;
     color: #fff;
+
     &:hover {
       background: #1d93cc;
 
     }
-    &,&-close{
+
+    &, &-close {
       padding: 10px 25px;
       border: none;
       width: 100%;
@@ -88,11 +93,13 @@ const closeContact = () => {
       font-weight: 500;
       transition: .25s;
     }
-    &-close{
+
+    &-close {
       background: #ea0941;
       color: #fff;
       margin-top: 10px;
-      &:hover{
+
+      &:hover {
         background: #DA0037;
       }
     }

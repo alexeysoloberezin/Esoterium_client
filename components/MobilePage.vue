@@ -68,6 +68,8 @@ import Correct from "./Slides/Correct.vue";
 <style lang="scss">
 .mobilePage {
   display: none;
+  max-width: 100vw;
+  overflow-x: hidden;
   position: relative;
   z-index: 20;
   @media (max-width: 1000px) {

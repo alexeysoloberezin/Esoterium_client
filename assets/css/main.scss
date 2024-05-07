@@ -1,8 +1,9 @@
 @import "https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,400;1,700&display=swap";
 @import "https://fonts.googleapis.com/icon?family=Material+Icons";
 @import url('https://fonts.googleapis.com/css2?family=Prata&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
 
-$font1: "Prata", serif;
+$font1: "Montserrat", serif;
 $primary: #ec4899;
 $sec: #b03eea;
 
@@ -10,9 +11,13 @@ $sec: #b03eea;
   font-family: $font1;
 }
 
+html, #__nuxt{
+  max-width: 100vw !important;
+  width: 100% !important;
+  overflow-x: hidden !important;
+}
 h2{
   font-size: 21px;
-  font-style: italic;
   font-weight: 600;
   line-height: 1.35;
   @media (max-width: 1000px) {
