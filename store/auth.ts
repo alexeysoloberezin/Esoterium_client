@@ -43,7 +43,7 @@ export const useAuthStore = defineStore('authStore', () => {
         useNuxtApp().$toast.error(error.value?.data?.message || 'Ошибка входа');
       }
     } catch ({response}) {
-      useNuxtApp().$toast.error('Ошибка входа');
+      useNuxtApp().$toast.error('Серверная Ошибка входа');
     } finally {
       loading.value = false
     }
