@@ -11,6 +11,10 @@ $sec: #b03eea;
   font-family: $font1;
 }
 
+.word{
+  word-break: break-all;
+}
+
 html, #__nuxt{
   max-width: 100vw !important;
   width: 100% !important;

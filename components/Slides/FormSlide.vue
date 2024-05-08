@@ -28,7 +28,7 @@
         <Button @click="payTest">
           Test send axios
         </Button>
-        <pre>
+        <pre class="word">
                   {{ info }}
         </pre>
       </div>
