@@ -14,7 +14,7 @@
         </svg>
       </template>
       <template #item="{ item, props, hasSubmenu, root }">
-        <RouterLink :to="item.path" v-ripple class="flex align-items-center mx-2" v-bind:class="{ 'text-primary': $route.path === item.path }" v-bind="props.action">
+        <RouterLink :to="item.path" v-ripple class="flex align-items-center mx-2 p-1" v-bind:class="{ 'text-primary': $route.path === item.path }" v-bind="props.action">
           <span :class="item.icon"/>
           <span class="ml-2" >{{ item.label }}</span>
           <Badge v-if="item.badge" :class="{ 'ml-auto': !root, 'ml-2': root }" :value="item.badge"/>
@@ -25,7 +25,7 @@
         </RouterLink>
       </template>
       <template #end>
-        <div class="flex align-items-center gap-2 ml-auto">
+        <div class="flex align-items-center gap-2 ml-auto px-2">
 <!--          <InputText placeholder="Search" type="text" class="w-8rem sm:w-auto px-2 py-2 ml-2"/>-->
 <!--          <Avatar image="https://primefaces.org/cdn/primevue/images/avatar/amyelsner.png" shape="circle"/>-->
           <RouterLink to="/auth/logout" class="ml-auto">
