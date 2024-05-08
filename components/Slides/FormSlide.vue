@@ -47,7 +47,7 @@ const pay = async () => {
   try {
     localStorage.removeItem('paymentToken')
 
-    const {status, data, error}: any = await useApi('/payment/getPaymentLink', {
+    const {status, data, error}: any = await useApi('payment/getPaymentLink', {
       method: 'post',
       body: form.value,
     })
@@ -70,6 +70,7 @@ const pay = async () => {
     }
   } catch (err) {
     console.log('e', err)
+    useNuxtApp().$toast.error(error.value?.data?.message || 'Ошибка запроса');
     loading.value = false
   } finally {
   }
