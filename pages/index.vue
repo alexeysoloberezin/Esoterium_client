@@ -322,16 +322,7 @@ function init() {
   const loader = new GLTFLoader();
   // loader.load('', (gltf) => {
 
-  const links = [
-    'rhetorician/scene.gltf',
-    '/the_thinker_by_auguste_rodin/scene.gltf',
-    '/assets/sc.glb',
-    '/assets/scene2.glb',
-    '/assets/scene3.glb',
-    '/assets/test1.glb'
-  ]
-
-  loader.load(links[2], (gltf) => {
+  loader.load('/assets/sc.glb', (gltf) => {
     model = gltf.scene;
     model.scale.set(1.3, 1.3, 1.3);
     model.position.x = 0; // Сдвиг модели вправо на сцене
