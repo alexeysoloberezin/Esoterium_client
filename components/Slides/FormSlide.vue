@@ -68,7 +68,7 @@ const payTest = async () => {
     err: null,
   }
   try {
-    const res = await axios.post('https://82.147.71.137/payment/getPaymentLink', form.value)
+    const res = await axios.post('http://esoterium-server.ru/payment/getPaymentLink', form.value)
     testData.res = res
   }catch (err){
     alert('catch')
