@@ -3,11 +3,13 @@
     <div class="">
       <div class="container_wrp">
         <h1 :style="getDelay(1)"> Готовы узнать всё о себе, своём будущем и исполнить все свои мечты?<br/></h1>
-        <p style="font-size: 15px">Стоимость диагностики всех сфер жизни по ладони <b>7500₽</b>, коррекция всех сфер жизни также
+        <p style="font-size: 15px">Стоимость диагностики всех сфер жизни по ладони <b>7500₽</b>, коррекция всех сфер
+          жизни также
           <b>7500₽</b>, при покупке
           комбо Диагностика+Коррекция вы получите приятный подарок!
         </p>
-        <p class="pt-2" style="font-size: 15px">Возможна оплата в рассрочку от банка без переплат и первоначального взноса.</p>
+        <p class="pt-2" style="font-size: 15px">Возможна оплата в рассрочку от банка без переплат и первоначального
+          взноса.</p>
 
         <form class="relative z-5 p-4 shadow-2 form bg-card border-round  w-full mt-3"
               style="max-width: 700px">
@@ -23,6 +25,9 @@
                     class="w-full py-2 flex hoverable text-center mt-2"></Button>
           </div>
         </form>
+        <pre>
+                  {{ info }}
+        </pre>
       </div>
     </div>
   </div>
