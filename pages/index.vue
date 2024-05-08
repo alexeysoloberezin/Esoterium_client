@@ -59,7 +59,6 @@
       {{ indexView }}
     </div>
   </div>
-
 </template>
 
 <script setup>

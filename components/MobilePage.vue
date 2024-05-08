@@ -7,6 +7,7 @@
     <Correct />
     <Reviews />
     <FormSlide />
+    <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 <!--    <div class="mobilePage-wrp">-->
 <!--      <div class="mobilePage-box">-->
 <!--        <h1>Откройте тайны своих линий рук с&nbsp;нашими экспертами по хиромантии!</h1>-->
