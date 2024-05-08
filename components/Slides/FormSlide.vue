@@ -25,6 +25,9 @@
                     class="w-full py-2 flex hoverable text-center mt-2"></Button>
           </div>
         </form>
+        <Button @click="payTest">
+          Test send axios
+        </Button>
         <pre>
                   {{ info }}
         </pre>
@@ -39,6 +42,7 @@ import {useAnimate} from "@/composables/useAnimate";
 import {useApi} from "@/composables/useApi";
 import {useNuxtApp} from "nuxt/app";
 import {onMounted} from "vue";
+import axios from "axios";
 
 const form = ref({
   email: '',
@@ -53,6 +57,24 @@ const info = ref({
   error: null,
   catch: null
 })
+
+const testData = ref({
+  res: null,
+  err: null,
+})
+const payTest = async () => {
+  testData.value = {
+    res: null,
+    err: null,
+  }
+  try {
+    const res = await axios.post('https://82.147.71.137/payment/getPaymentLink', form.value)
+    testData.res = res
+  }catch (err){
+    alert('catch')
+    testData.err = err
+  }
+}
 
 const pay = async () => {
   loading.value = true
