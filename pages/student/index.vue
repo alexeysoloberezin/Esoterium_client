@@ -67,18 +67,18 @@
           </div>
         </div>
         <div class="grid">
-          <div class="md:col-6 col-12 p-2">
-            <Card
-                class="student-card"
-            >
-              <template #content>
-                <ClientChart
-                    v-if="clients"
-                    :clients="clients"
-                />
-              </template>
-            </Card>
-          </div>
+<!--          <div class="md:col-6 col-12 p-2">-->
+<!--            <Card-->
+<!--                class="student-card"-->
+<!--            >-->
+<!--              <template #content>-->
+<!--                <ClientChart-->
+<!--                    v-if="clients"-->
+<!--                    :clients="clients"-->
+<!--                />-->
+<!--              </template>-->
+<!--            </Card>-->
+<!--          </div>-->
           <div class="md:col-6 p-2">
             <Card class="student-card">
               <template #content>
