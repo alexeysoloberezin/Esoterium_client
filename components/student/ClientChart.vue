@@ -76,5 +76,5 @@ const options = ref({
 </script>
 
 <template>
-  <Line :data="data" :options="options" />
+  <Line :data="data" :options="options" style="min-height: 300px" />
 </template>

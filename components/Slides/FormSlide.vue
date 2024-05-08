@@ -25,12 +25,6 @@
                     class="w-full py-2 flex hoverable text-center mt-2"></Button>
           </div>
         </form>
-        <Button @click="payTest">
-          Test send axios
-        </Button>
-        <pre class="word">
-                  {{ info }}
-        </pre>
       </div>
     </div>
   </div>
@@ -51,39 +45,8 @@ const form = ref({
 
 const loading = ref(false)
 
-const info = ref({
-  status: null,
-  data: null,
-  error: null,
-  catch: null
-})
-
-const testData = ref({
-  res: null,
-  err: null,
-})
-const payTest = async () => {
-  testData.value = {
-    res: null,
-    err: null,
-  }
-  try {
-    const res = await axios.post('https://esoterium-server.ru/payment/getPaymentLink', form.value)
-    testData.value.res = res
-  }catch (err){
-    alert('catch')
-    testData.value.err = err
-  }
-}
-
 const pay = async () => {
   loading.value = true
-  info.value = {
-    status: null,
-    data: null,
-    error: null,
-    catch: null
-  }
 
   try {
     localStorage.removeItem('paymentToken')
@@ -92,9 +55,7 @@ const pay = async () => {
       method: 'post',
       body: form.value,
     })
-    info.value = {
-      status, data, error, catch: null
-    }
+
 
     if (error.value) {
       if (Array.isArray(error.value.data.message) && error.value.data.message.length) {
@@ -113,10 +74,8 @@ const pay = async () => {
       window.location.href = data.value.link
     }
   } catch (err) {
-    console.log('e', err)
     useNuxtApp().$toast.error(error.value?.data?.message || 'Ошибка запроса');
     loading.value = false
-    info.value.catch = err
   } finally {
   }
 }

@@ -3,11 +3,11 @@
 </template>
 
 <script setup lang="ts">
-definePageMeta({
-  middleware: [
-    'student',
-  ],
-});
+// definePageMeta({
+//   middleware: [
+//     'student',
+//   ],
+// });
 </script>
 
 <style scoped>

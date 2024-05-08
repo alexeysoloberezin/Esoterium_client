@@ -7,7 +7,7 @@
             Вам нужно заполнить данные профиля
           </Message>
         </RouterLink>
-        <h1>Ваша статистика - {{ me?.email }}</h1>
+        <h1 class="world">Ваша статистика - {{ me?.email }}</h1>
         <div v-if="clients" class="grid">
           <div class="lg:col-3 md:col-6 col-12 p-2">
             <Card class="border-primary border-1">
@@ -79,7 +79,7 @@
               </template>
             </Card>
           </div>
-          <div class="col-6 p-2">
+          <div class="md:col-6 p-2">
             <Card class="student-card">
               <template #content>
                 <ClientTable
