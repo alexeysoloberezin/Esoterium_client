@@ -42,8 +42,22 @@ const form = ref({
 
 const loading = ref(false)
 
+const info = ref({
+  status: null,
+  data: null,
+  error: null,
+  catch: null
+})
+
 const pay = async () => {
   loading.value = true
+  info.value = {
+    status: null,
+    data: null,
+    error: null,
+    catch: null
+  }
+
   try {
     localStorage.removeItem('paymentToken')
 
@@ -51,6 +65,9 @@ const pay = async () => {
       method: 'post',
       body: form.value,
     })
+    info.value = {
+      status, data, error, catch: null
+    }
 
     if (error.value) {
       if (Array.isArray(error.value.data.message) && error.value.data.message.length) {
@@ -72,6 +89,7 @@ const pay = async () => {
     console.log('e', err)
     useNuxtApp().$toast.error(error.value?.data?.message || 'Ошибка запроса');
     loading.value = false
+    info.value.catch = err
   } finally {
   }
 }
