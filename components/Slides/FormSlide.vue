@@ -69,10 +69,10 @@ const payTest = async () => {
   }
   try {
     const res = await axios.post('http://esoterium-server.ru/payment/getPaymentLink', form.value)
-    testData.res = res
+    testData.value.res = res
   }catch (err){
     alert('catch')
-    testData.err = err
+    testData.value.err = err
   }
 }
 
