@@ -32,7 +32,7 @@
                         <i class="pi pi-dollar"/>
                     </span>
                   <span class="text-secondary font-semibold line-height-2 text-sm">Заработано в этом месяце:</span>
-                  <span class="font-bold text-primary text-lg">{{ clientsInThisMonth?.length * pricePerClient }} ₽</span>
+                  <span class="font-bold text-primary text-lg">{{ calcSumByClient(clientsInThisMonth) }} ₽</span>
                 </div>
               </template>
             </Card>
@@ -52,7 +52,7 @@
             </Card>
           </div>
           <div  class="md:col-3 col-12 p-2">
-            <Card class="border-primary border-1">
+            <Card v-if="Array.isArray(clients)" class="border-primary border-1">
               <template #content>
                 <div class="flex align-items-center gap-2 p-3">
                    <span
@@ -60,7 +60,7 @@
                         <i class="pi pi-dollar"/>
                     </span>
                   <span class="text-secondary font-semibold line-height-2 text-sm">Заработано за всё время:</span>
-                  <span class="font-bold text-primary text-lg">{{ clients.length * pricePerClient }} ₽</span>
+                  <span class="font-bold text-primary text-lg">{{ calcSumByClient(clients) }} ₽</span>
                 </div>
               </template>
             </Card>
@@ -100,8 +100,8 @@ import MainLayout from "@/layouts/MainLayout.vue";
 import StudentLayout from "@/layouts/StudentLayout.vue";
 import {useApi} from "@/composables/useApi";
 import ClientTable from "@/components/student/ClientTable.vue";
-import ClientChart from "@/components/student/ClientChart.vue";
 import {computed} from "vue";
+import {calcSumByClient} from '@/js/calcSumByClient'
 
 definePageMeta({
   middleware: [

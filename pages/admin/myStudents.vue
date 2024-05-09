@@ -49,7 +49,11 @@
 <!--              {{ slotProps.data.clients.map(el => el.name).join(' / ') }}-->
             </template>
           </Column>
-          <Column field="role" header="Роль" ></Column>
+          <Column field="gotIt" header="gotIt" >
+            <template #body="slotProps">
+              {{ calcSumByClient(slotProps.data.clients) }}
+            </template>
+          </Column>
           <Column field="createdAt" header="Создан" >
             <template #body="slotProps">
               <div class="flex align-items-center gap-2">
@@ -86,6 +90,7 @@ import {useApi} from "@/composables/useApi";
 import {useNuxtApp} from "nuxt/app";
 import {useToast} from "primevue/usetoast";
 import {useConfirm} from "primevue/useconfirm";
+import {calcSumByClient} from '@/js/calcSumByClient'
 
 const students = ref<any>([])
 

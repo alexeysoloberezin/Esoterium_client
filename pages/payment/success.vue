@@ -54,7 +54,7 @@ onMounted(async () => {
     // navigateTo('/payment/error')
   }
 
-  const {status: getPaymentStatus, data: tokenData} = await useApi('payment/getPaymentToken', {
+    const {status: getPaymentStatus, data: tokenData} = await useApi('payment/getPaymentToken', {
     method: 'post',
     body: {
       token: localToken

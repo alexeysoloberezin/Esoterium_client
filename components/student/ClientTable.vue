@@ -15,7 +15,9 @@
       <Column header="Доход" >
         <template #body="slotProps">
           <div>
-            <Tag severity="success" value="Success">+7500 ₽</Tag>
+            <Tag severity="success" value="Success">
+              + {{ prices?.[slotProps?.data?.typeProduct] }}
+            </Tag>
           </div>
         </template>
       </Column>
@@ -32,6 +34,7 @@
 
 <script setup lang="ts">
 import {useApi} from "@/composables/useApi";
+import {prices} from "@/js/calcSumByClient";
 
 const props = defineProps<{
   clients: any

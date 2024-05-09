@@ -41,6 +41,7 @@ import {useApi} from "@/composables/useApi";
 import {useNuxtApp} from "nuxt/app";
 import {onMounted} from "vue";
 import axios from "axios";
+import {productTypesTemplate} from "@/js/calcSumByClient";
 
 const form = ref({
   email: '',
@@ -48,10 +49,7 @@ const form = ref({
   typeProduct: 'Diagnost',
 })
 
-const productTypes = ref([
-  { name: 'Диагностика 7500₽', code: 'Diagnost', price: 7500 },
-  { name: 'Диагностика+коррекция+подарок 15.000₽', code: 'DiagnostPlusCorr', price: 15000 },
-]);
+const productTypes = ref(productTypesTemplate);
 
 const loading = ref(false)
 
