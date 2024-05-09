@@ -364,4 +364,23 @@ td{
   padding: 7px;
 }
 
+.p-dropdown-item-label{
+  padding: 10px;
+}
+.p-dropdown-panel .p-dropdown-items .p-dropdown-item, .p-dropdown-panel .p-dropdown-items .p-dropdown-item.p-highlight, .p-dropdown-panel, .p-dropdown-panel .p-dropdown-items .p-dropdown-item:not(.p-highlight):not(.p-disabled).p-focus{
+  background: #100f0f !important;
+  color: #fff !important;
+}
+
+.formSlide{
+  .p-dropdown{
+    background: #100f0f;
+    color: #fff;
+  }
+
+  .p-inputtext{
+    color: #fff;
+  }
+}
+
 @import "slider";

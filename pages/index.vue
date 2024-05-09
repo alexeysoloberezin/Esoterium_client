@@ -95,6 +95,8 @@ const cameraPositions = [
   new THREE.Vector3(-1, -0.4, 5), // 4
   new THREE.Vector3(0, 0, 5), // 5
   new THREE.Vector3(0, 0, 5), // Позиция для второго слайда
+  new THREE.Vector3(0, 0, 5), // Позиция для второго слайда
+  new THREE.Vector3(0, 0, 5), // Позиция для второго слайда
 ];
 const cameraRotate = [
   {
@@ -147,6 +149,19 @@ const cameraRotate = [
     },
     l1: [5, 4, 6],
     l2: [-4, -5, -5],
+    l3: [-3, -5, -4],
+  },
+  {
+    x: 0.35,
+    y: 0.35,
+    z: -0.5,
+    model: {
+      x: 0,
+      y: 5.2,
+      z: 0,
+    },
+    l1: [3, 3, 3],
+    l2: [-1, -5, 5],
     l3: [-3, -5, -4],
   },
   {
@@ -402,11 +417,20 @@ function updateCameraPosition(index) {
 
   const duration = 7
 
-  gsap.to(light1.position.set, {x: newPosRotate.l1[0], y: newPosRotate.l1[1], z: newPosRotate.l1[2], duration}); // Используя GSAP для плавного перехода
-  gsap.to(light2.position.set, {x: newPosRotate.l2[0], y: newPosRotate.l2[1], z: newPosRotate.l2[2], duration}); // Используя GSAP для плавного перехода
-  gsap.to(camera.position, {x: newPos.x, y: newPos.y, z: newPos.z, duration}); // Используя GSAP для плавного перехода
-  gsap.to(camera.rotation, {x: newPosRotate.x, y: newPosRotate.y, z: newPosRotate.z, duration}); // Используя GSAP для плавного перехода
-  gsap.to(model.rotation, {x: newPosRotate.model.x, y: newPosRotate.model.y, z: newPosRotate.model.z, duration}); // Используя GSAP для плавного перехода
+  try {
+    gsap.to(light1.position.set, {x: newPosRotate.l1[0], y: newPosRotate.l1[1], z: newPosRotate.l1[2], duration}); // Используя GSAP для плавного перехода
+    gsap.to(light2.position.set, {x: newPosRotate.l2[0], y: newPosRotate.l2[1], z: newPosRotate.l2[2], duration}); // Используя GSAP для плавного перехода
+    gsap.to(camera.position, {x: newPos?.x , y: newPos?.y , z: newPos?.z , duration}); // Используя GSAP для плавного перехода
+    gsap.to(camera.rotation, {x: newPosRotate?.x , y: newPosRotate?.y , z: newPosRotate?.z , duration}); // Используя GSAP для плавного перехода
+    gsap.to(model.rotation, {
+      x: newPosRotate.model?.x ,
+      y: newPosRotate.model?.y ,
+      z: newPosRotate.model?.z ,
+      duration
+    }); // Используя GSAP для плавного перехода
+  } catch (err) {
+
+  }
 }
 </script>
 

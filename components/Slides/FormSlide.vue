@@ -11,7 +11,7 @@
         <p class="pt-2" style="font-size: 15px">Возможна оплата в рассрочку от банка без переплат и первоначального
           взноса.</p>
 
-        <form class="relative z-5 p-4 shadow-2 form bg-card border-round  w-full mt-3"
+        <form class="relative z-5 p-4 shadow-2 form bg-card border-round formSlide  w-full mt-3"
               style="max-width: 700px">
           <div>
             <label for="em" class="block  font-medium mb-2">Почта</label>
@@ -19,11 +19,15 @@
 
             <label for="phone" class="block  font-medium mb-2">Телефон</label>
             <InputMask v-model="form.phone" id="phone" mask="+7(999)-999-99-99" placeholder="+7(912)-854-34-12"
-                       class="w-full p-2 mb-3"/>
+                       class="w-full p-2 mb-4"/>
+
+            <Dropdown v-model="form.typeProduct" :options="productTypes" option-value="code" optionLabel="name" placeholder="Select a City"
+                      class="w-full"/>
 
             <Button @click="pay" :loading="loading" :label="loading ? 'Загрузка...' : 'Купить'"
-                    class="w-full py-2 flex hoverable text-center mt-2"></Button>
+                    class="w-full py-2 flex hoverable text-center mt-3"></Button>
           </div>
+          {{ form }}
         </form>
       </div>
     </div>
@@ -41,7 +45,13 @@ import axios from "axios";
 const form = ref({
   email: '',
   phone: '',
+  typeProduct: 'Diagnost',
 })
+
+const productTypes = ref([
+  { name: 'Диагностика 7500₽', code: 'Diagnost', price: 7500 },
+  { name: 'Диагностика+коррекция+подарок 15.000₽', code: 'DiagnostPlusCorr', price: 15000 },
+]);
 
 const loading = ref(false)
 
