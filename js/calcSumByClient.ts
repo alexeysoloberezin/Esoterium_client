@@ -12,7 +12,7 @@ export function calcSumByClient(arr: any[]): number{
   let sum = 0
 
   arr.forEach(el => {
-    sum += prices[el.type] || 0
+    sum += prices[el.typeProduct] || 0
   })
 
   return sum
