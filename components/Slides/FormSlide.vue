@@ -27,7 +27,6 @@
             <Button @click="pay" :loading="loading" :label="loading ? 'Загрузка...' : 'Купить'"
                     class="w-full py-2 flex hoverable text-center mt-3"></Button>
           </div>
-          {{ form }}
         </form>
       </div>
     </div>
