@@ -43,6 +43,18 @@
               </div>
             </template>
           </Column>
+          <Column field="atv" header="Все данные есть" >
+            <template #body="slotProps">
+              <div v-if="slotProps.data.atv"
+                   style="color: #18d030"
+              >
+                Активен
+              </div>
+              <div v-else class="" style="color: #ec4899">
+                Скрытый аккаунт
+              </div>
+            </template>
+          </Column>
           <Column  header="Клиентов" >
             <template #body="slotProps">
               {{ slotProps.data.clients.length }}
@@ -54,13 +66,13 @@
               {{ calcSumByClient(slotProps.data.clients) }}
             </template>
           </Column>
-          <Column field="createdAt" header="Создан" >
-            <template #body="slotProps">
-              <div class="flex align-items-center gap-2">
-                <span>{{ slotProps.data.createdAt ? new Date(slotProps.data.createdAt).toLocaleString('ru-RU') : '' }}</span>
-              </div>
-            </template>
-          </Column>
+<!--          <Column field="createdAt" header="Создан" >-->
+<!--            <template #body="slotProps">-->
+<!--              <div class="flex align-items-center gap-2">-->
+<!--                <span>{{ slotProps.data.createdAt ? new Date(slotProps.data.createdAt).toLocaleString('ru-RU') : '' }}</span>-->
+<!--              </div>-->
+<!--            </template>-->
+<!--          </Column>-->
           <Column header="Действия" >
             <template #body="slotProps">
               <div class="flex align-items-center gap-2">
@@ -70,6 +82,8 @@
                 </ConfirmPopup>
 
                 <Button size="small" @click="confirm1($event, slotProps.data.id)" outlined>Удалить</Button>
+
+                <Button :loading="changeActiveLoading" size="small" @click="changeActiveStatus" outlined>Изменить статус</Button>
               </div>
             </template>
           </Column>
@@ -97,6 +111,7 @@ const students = ref<any>([])
 const {data} = useApi('/auth/students', {
   method: 'get'
 })
+const changeActiveLoading = ref(false)
 
 const studentData = ref({
   email: '',
@@ -159,6 +174,29 @@ const addStudent = async () => {
     }
     await fetchStudents()
   }
+}
+
+const changeActiveStatus = async (id) => {
+  changeActiveLoading.value = true
+  try {
+    const {data, status, error} = await useApi('auth/changeStatusAtv', {
+      method: 'post',
+      body: {
+        id
+      },
+    })
+
+    if(status.value === 'success'){
+      await fetchStudents()
+    }else if(status.value === 'error'){
+      useNuxtApp().$toast.error(error.value.data.message || 'Ошибка')
+    }
+  }catch (err){
+
+  }finally {
+    changeActiveLoading.value = false
+  }
+
 }
 
 const deleteStudent = async (id) => {
