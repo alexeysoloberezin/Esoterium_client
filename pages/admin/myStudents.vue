@@ -83,7 +83,7 @@
 
                 <Button size="small" @click="confirm1($event, slotProps.data.id)" outlined>Удалить</Button>
 
-                <Button :loading="changeActiveLoading" size="small" @click="changeActiveStatus" outlined>Изменить статус</Button>
+                <Button :loading="changeActiveLoading" size="small" @click="changeActiveStatus(slotProps.data.id)" outlined>Изменить статус</Button>
               </div>
             </template>
           </Column>
