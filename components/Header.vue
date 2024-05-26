@@ -60,6 +60,12 @@ const itemsAdmin = [
     path: '/admin/myStudents',
     icon: 'pi pi-users'
   },
+  {
+    label: 'Список оплат',
+    path: '/admin/paymentList',
+    icon: 'pi pi-users'
+  },
+
 ];
 
 const itemsStudent = [
