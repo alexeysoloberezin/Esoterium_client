@@ -73,6 +73,7 @@ onMounted(async () => {
   //   return
   // }
 
+  console.log('test')
   // localStorage.setItem('student', JSON.stringify(student))
   // telegram.value = student.telegram
   // localStorage.removeItem('paymentToken')
