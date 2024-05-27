@@ -37,59 +37,45 @@ onMounted(async () => {
   const tokenCorrect = localToken === _payform_order_id
   loading.value = true
 
-  if (
-      _payform_status !== 'success'
-      || !tokenCorrect
-  ) {
-    if (!tokenCorrect) {
-      useNuxtApp().$toast?.error('Токен не найден или уже использован')
-    } else if (_payform_status !== 'success') {
-      useNuxtApp().$toast?.error('Статус платежа не успешен')
-    }
-    // todo: error page
-    console.log('ERROR')
+  // const {status: getPaymentStatus, data: tokenData} = await useApi('payment/getPaymentToken', {
+  //   method: 'post',
+  //   body: {
+  //     token: localToken
+  //   }
+  // })
 
-    loading.value = false
-    return
-    // navigateTo('/payment/error')
-  }
+  // if (getPaymentStatus.value !== 'success') {
+  //   useNuxtApp().$toast?.error('Ошибка, токен не действителен')
+  //   loading.value = false
+  //   return
+  // }
 
-    const {status: getPaymentStatus, data: tokenData} = await useApi('payment/getPaymentToken', {
+  const {data, status, error} = await useApi('payment/getPaymentInfoByPayform_order_id', {
     method: 'post',
     body: {
-      token: localToken
+      token: _payform_order_id
     }
   })
 
-  if (getPaymentStatus.value !== 'success') {
-    useNuxtApp().$toast?.error('Ошибка, токен не действителен')
-    loading.value = false
-    return
-  }
+  console.log('data', data)
+  // if (status.value !== 'success' || !data.value?.student) {
+  //   useNuxtApp().$toast.error('Ошибка при создании клиента')
+  //   loading.value = false
+  //   return
+  // }
+  //
+  // const {student} = data.value as any
+  //
+  // if (!student) {
+  //   useNuxtApp().$toast.error('Ошибка при создании студента')
+  //   loading.value = false
+  //   return
+  // }
 
-  const {data, status, error} = await useApi('client/create', {
-    method: 'post',
-    body: tokenData.value
-  })
-
-  if (status.value !== 'success' || !data.value?.student) {
-    useNuxtApp().$toast.error('Ошибка при создании клиента')
-    loading.value = false
-    return
-  }
-
-  const {student} = data.value as any
-
-  if (!student) {
-    useNuxtApp().$toast.error('Ошибка при создании студента')
-    loading.value = false
-    return
-  }
-
-  localStorage.setItem('student', JSON.stringify(student))
-  telegram.value = student.telegram
-  localStorage.removeItem('paymentToken')
-  visible.value = true
+  // localStorage.setItem('student', JSON.stringify(student))
+  // telegram.value = student.telegram
+  // localStorage.removeItem('paymentToken')
+  // visible.value = true
   loading.value = false
 })
 </script>
