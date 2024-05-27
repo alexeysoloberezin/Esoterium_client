@@ -58,6 +58,7 @@ onMounted(async () => {
   })
 
   console.log('data', data)
+
   // if (status.value !== 'success' || !data.value?.student) {
   //   useNuxtApp().$toast.error('Ошибка при создании клиента')
   //   loading.value = false
