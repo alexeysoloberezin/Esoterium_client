@@ -1,7 +1,6 @@
 <template>
   <AdminLayout>
     <MainLayout>
-      {{ data }}
       <DataTable :value="arr" paginator :rows="15" :rowsPerPageOptions="[5, 10, 20, 50]"
                  tableStyle="min-width: 50rem">
         <Column header="Ордер ID">
