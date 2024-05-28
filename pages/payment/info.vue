@@ -17,6 +17,28 @@
         }}
       </button>
     </div>
+
+
+    <Button label="Show" @click="visible = true" />
+
+    <Dialog v-model:visible="visible" modal  :style="{ width: '25rem' }">
+      <div class="p-3">
+        <h4>{{ message }}</h4>
+        <span class="p-text-secondary block mb-5">Введите последние 4 цифры номера телефона:</span>
+        <div class="flex align-items-center gap-3 mb-3">
+          <label for="username" class="font-semibold w-6rem">Телефон</label>
+          <InputText v-model="phone" id="username" class="flex-auto" autocomplete="off" />
+        </div>
+        <div class="flex align-items-center gap-3 mb-5">
+          <label for="email" class="font-semibold w-6rem">Email</label>
+          <InputText v-model="email" id="email" class="flex-auto" readonly disabled autocomplete="off" />
+        </div>
+        <div class="flex justify-content-end gap-2">
+          <Button type="button" label="Cancel" severity="secondary" @click="visible = false"></Button>
+          <Button type="button" label="Save" @click="visible = false"></Button>
+        </div>
+      </div>
+    </Dialog>
   </div>
 </template>
 
@@ -24,8 +46,12 @@
 import {useNuxtApp} from "nuxt/app";
 
 const email = ref('')
-const array: any = ref([])
+const phone = ref('')
+const count: any = ref(0)
+const message = ref('')
+
 const loading = ref(false)
+const visible = ref(false)
 
 const fetchList = async () => {
   if(!email.value){
@@ -35,15 +61,18 @@ const fetchList = async () => {
 
   loading.value = true
   try {
-    const {data, status} = useApi('client/getPaymentsByEmail', {
+    const {data, status}: any = useApi('/client/getPaymentsByEmail', {
       method: 'post',
       body: {
         email: email.value
       }
     })
+    // todo confirm
 
     if(status.value === 'success'){
-      array.value = data.value || []
+      message.value = data.value?.count || 0
+      count.value = data.value?.message || ''
+      visible.value = true
     }
   }catch (err){
 
@@ -55,6 +84,7 @@ const fetchList = async () => {
 
 <style  lang="scss">
 .infoPage {
+  min-height: 100vh;
   &-inp {
     background: #262525;
     outline: none;
