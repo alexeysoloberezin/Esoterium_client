@@ -52,7 +52,7 @@ const loading = computed(() => authStore.loading)
 const params = route.query
 
 const showTeh = computed(() => {
-  return params?.admin ? false : tehWorks.value
+  return params?.go ? false : tehWorks.value
 })
 
 const onSubmit = async () => {
