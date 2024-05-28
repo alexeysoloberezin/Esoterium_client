@@ -42,7 +42,6 @@ type Payment = {
 function fetchInfo() {
   const localToken = localStorage.getItem('paymentToken')
 
-  const tokenCorrect = localToken === _payform_order_id
   loading.value = true
 
   const {data, status, error} : {data: Ref<Payment>, status: any, error: any} = await useApi('payment/getPaymentInfoByPayform_order_id', {
@@ -51,7 +50,6 @@ function fetchInfo() {
       token: _payform_order_id
     }
   })
-
 
 
   if (status.value !== 'success') {
