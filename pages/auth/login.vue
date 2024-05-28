@@ -28,7 +28,7 @@
           <Button :loading="loading" type="submit" label="Войти" icon="pi pi-user" class="w-full"></Button>
         </div>
       </form>
-      <Card v-else>
+      <Card v-else class="bg-white" style="max-width: 400px;margin: 0 auto;">
         <template #title>Технические работы</template>
         <template #content>Please wait</template>
       </Card>
