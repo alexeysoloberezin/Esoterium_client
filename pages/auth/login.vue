@@ -5,7 +5,7 @@
       <img  src="/hand.webp" alt="">
     </div>
     <div>
-      <form @submit.prevent="onSubmit" class="surface-card relative z-5 p-4 shadow-2 mx-auto  border-round  w-full" style="max-width: 700px">
+      <form v-if="!tehWorks" @submit.prevent="onSubmit" class="surface-card relative z-5 p-4 shadow-2 mx-auto  border-round  w-full" style="max-width: 700px">
         <div class="text-center mb-5">
           <!--      <img src="/images/blocks/logos/hyper.svg" alt="Image" height="50" class="mb-3" />-->
           <div class="text-900 text-3xl font-medium mb-3">Вход в личный кабинет</div>
@@ -27,6 +27,10 @@
           <Button :loading="loading" type="submit" label="Войти" icon="pi pi-user" class="w-full"></Button>
         </div>
       </form>
+      <Card v-else>
+        <template #title>Технические работы</template>
+        <template #content>Please wait</template>
+      </Card>
     </div>
   </div>
 </template>
@@ -36,9 +40,10 @@ import {useAuthStore} from "@/store/auth";
 import {useNuxtApp, useRoute} from "nuxt/app";
 
 const authStore = useAuthStore()
-const loading = computed(() => authStore.loading)
+const tehWorks = ref(true)
 
-const route = useRoute()
+    const route = useRoute()
+const loading = computed(() => authStore.loading)
 const params = route.query
 
 const onSubmit = async () => {
