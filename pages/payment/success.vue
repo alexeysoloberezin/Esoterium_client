@@ -52,6 +52,8 @@ function fetchInfo() {
     }
   })
 
+
+
   if (status.value !== 'success') {
     useNuxtApp().$toast.error('Не успешная оплата.')
     loading.value = false
