@@ -39,24 +39,11 @@ type Payment = {
   paymentToken: string;
 }
 
-onMounted(async () => {
+function fetchInfo() {
   const localToken = localStorage.getItem('paymentToken')
 
   const tokenCorrect = localToken === _payform_order_id
   loading.value = true
-
-  // const {status: getPaymentStatus, data: tokenData} = await useApi('payment/getPaymentToken', {
-  //   method: 'post',
-  //   body: {
-  //     token: localToken
-  //   }
-  // })
-
-  // if (getPaymentStatus.value !== 'success') {
-  //   useNuxtApp().$toast?.error('Ошибка, токен не действителен')
-  //   loading.value = false
-  //   return
-  // }
 
   const {data, status, error} : {data: Ref<Payment>, status: any, error: any} = await useApi('payment/getPaymentInfoByPayform_order_id', {
     method: 'post',
@@ -85,6 +72,10 @@ onMounted(async () => {
   telegram.value = student
   visible.value = true
   loading.value = false
+}
+
+onMounted(async () => {
+  fetchInfo()
 })
 </script>
 

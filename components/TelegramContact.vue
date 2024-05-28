@@ -23,6 +23,11 @@
           Открыть телеграм
         </a>
       </div>
+      <NuxtLink to="/payment/info" class="mb-1 w-full">
+        <div class="telegramContact-btn">
+          Список покупок.
+        </div>
+      </NuxtLink>
       <button v-if="showClose" @click="closeContact" class="telegramContact-btn-close">
         Закрыть
       </button>
