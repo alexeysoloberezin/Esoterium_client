@@ -24,6 +24,9 @@
         </Column>
       </DataTable>
 
+      <Button @click="removeAll">
+        Удалить весь список оплаты
+      </Button>
     </MainLayout>
   </AdminLayout>
 </template>
@@ -48,6 +51,17 @@ const arr = computed(() => {
   }
   return data.value.map(el => JSON.parse(el.json))
 })
+
+const removeAll = async () => {
+  const {data, status} = useApi('/client/clearPaymentList', {
+    method: 'post'
+  })
+
+  if(status.value === 'success'){
+    useNuxtApp().$toast?.error('Успешно')
+    window.location.reload()
+  }
+}
 </script>
 
 <style scoped>
