@@ -35,7 +35,7 @@ const fetchList = async () => {
 
   loading.value = true
   try {
-    const {data, status} = useApi('payment/getPaymentListByEmail', {
+    const {data, status} = useApi('client/getPaymentsByEmail', {
       method: 'post',
       body: {
         email: email.value
