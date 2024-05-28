@@ -46,6 +46,7 @@
 
 <script setup lang="ts">
 import {useNuxtApp} from "nuxt/app";
+import {useApi} from "@/composables/useApi";
 
 const email = ref('')
 const phone = ref('')
