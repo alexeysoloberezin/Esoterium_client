@@ -28,10 +28,13 @@
           <Button :loading="loading" type="submit" label="Войти" icon="pi pi-user" class="w-full"></Button>
         </div>
       </form>
-      <Card v-else class="bg-white" style="max-width: 400px;margin: 0 auto;">
-        <template #title>Технические работы</template>
-        <template #content>Please wait</template>
-      </Card>
+      <div v-else style="max-width: 400px;margin: 0 auto;">
+        <Card  class="bg-white p-4" >
+          <template #title>Технические работы</template>
+          <template #content>Please wait</template>
+        </Card>
+      </div>
+
     </div>
   </div>
 </template>
