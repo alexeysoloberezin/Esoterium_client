@@ -51,7 +51,6 @@ function fetchInfo() {
     }
   })
 
-
   if (status.value !== 'success') {
     useNuxtApp().$toast.error('Не успешная оплата.')
     loading.value = false
@@ -72,6 +71,7 @@ function fetchInfo() {
   telegram.value = student
   visible.value = true
   loading.value = false
+  console.log('tes')
 }
 
 onMounted(async () => {
