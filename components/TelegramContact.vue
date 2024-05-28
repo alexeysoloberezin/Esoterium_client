@@ -23,8 +23,8 @@
           Открыть телеграм
         </a>
       </div>
-      <NuxtLink to="/payment/info" class="my-1 w-full">
-        <div class="telegramContact-btn" style="text-decoration: none">
+      <NuxtLink to="/payment/info" class="my-1 w-full" style="text-decoration: none;">
+        <div class="telegramContact-btn" style="margin: 5px 0">
           Список покупок.
         </div>
       </NuxtLink>
