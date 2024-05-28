@@ -78,7 +78,7 @@ const fetchList = async () => {
       visible.value = true
     }
   }catch (err){
-    console.log('err', err)
+    console.error('err', err)
   }finally {
     loading.value = false
   }
