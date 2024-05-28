@@ -69,6 +69,7 @@ const fetchList = async () => {
         email: email.value
       }
     })
+    console.log('status', status)
     // todo confirm
 
     if(status.value === 'success'){
@@ -77,7 +78,7 @@ const fetchList = async () => {
       visible.value = true
     }
   }catch (err){
-
+    console.log('err', err)
   }finally {
     loading.value = false
   }
