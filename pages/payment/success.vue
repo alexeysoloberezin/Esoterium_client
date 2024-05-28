@@ -16,7 +16,7 @@
 
 <script setup lang="ts">
 import {navigateTo, useNuxtApp, useRoute} from "nuxt/app";
-import {onMounted} from "vue";
+import {onMounted, Ref} from "vue";
 import {useApi} from "@/composables/useApi";
 import TelegramContact from "@/components/TelegramContact.vue";
 
@@ -29,6 +29,14 @@ const loading = ref(false)
 const close = () => {
   visible.value = false
   navigateTo('/')
+}
+
+type Payment = {
+  customerEmail: string;
+  id: string;
+  json: string;
+  orderId: any;
+  paymentToken: string;
 }
 
 onMounted(async () => {
@@ -50,34 +58,32 @@ onMounted(async () => {
   //   return
   // }
 
-  const {data, status, error} = await useApi('payment/getPaymentInfoByPayform_order_id', {
+  const {data, status, error} : {data: Ref<Payment>, status: any, error: any} = await useApi('payment/getPaymentInfoByPayform_order_id', {
     method: 'post',
     body: {
       token: _payform_order_id
     }
   })
 
-  console.log('data', data)
+  if (status.value !== 'success') {
+    useNuxtApp().$toast.error('Не успешная оплата.')
+    loading.value = false
+    return
+  }
 
-  // if (status.value !== 'success' || !data.value?.student) {
-  //   useNuxtApp().$toast.error('Ошибка при создании клиента')
-  //   loading.value = false
-  //   return
-  // }
-  //
-  // const {student} = data.value as any
-  //
-  // if (!student) {
-  //   useNuxtApp().$toast.error('Ошибка при создании студента')
-  //   loading.value = false
-  //   return
-  // }
+  const json = JSON.parse(data.value.json)
 
-  console.log('test')
-  // localStorage.setItem('student', JSON.stringify(student))
-  // telegram.value = student.telegram
-  // localStorage.removeItem('paymentToken')
-  // visible.value = true
+  const student = json?.student?.telegram
+
+  if(!student){
+    useNuxtApp().$toast.error('Данные по контактам отсутствуют')
+    loading.value = false
+    return
+  }
+
+  localStorage.setItem('student', JSON.stringify(student))
+  telegram.value = student
+  visible.value = true
   loading.value = false
 })
 </script>
