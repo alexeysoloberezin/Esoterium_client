@@ -5,12 +5,12 @@
 </template>
 
 <script setup lang="ts">
-// definePageMeta({
-//   middleware: [
-//     'student',
-//   ],
-// });
 import {navigateTo} from "nuxt/app";
+definePageMeta({
+  middleware: [
+    'student',
+  ],
+});
 
 const tehWorks = ref(true)
 

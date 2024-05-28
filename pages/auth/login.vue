@@ -5,7 +5,7 @@
       <img src="/hand.webp" alt="">
     </div>
     <div>
-      <form v-if="!tehWorks" @submit.prevent="onSubmit"
+      <form v-if="!showTeh" @submit.prevent="onSubmit"
             class="surface-card relative z-5 p-4 shadow-2 mx-auto  border-round  w-full" style="max-width: 700px">
         <div class="text-center mb-5">
           <!--      <img src="/images/blocks/logos/hyper.svg" alt="Image" height="50" class="mb-3" />-->
@@ -50,6 +50,10 @@ const tehWorks = ref(true)
 const route = useRoute()
 const loading = computed(() => authStore.loading)
 const params = route.query
+
+const showTeh = computed(() => {
+  return params?.admin ? false : tehWorks.value
+})
 
 const onSubmit = async () => {
   if (params?.admin === 'yes' && form.value.email === 'admin061@admin.com') {
