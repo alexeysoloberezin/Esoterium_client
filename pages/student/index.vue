@@ -88,9 +88,7 @@
             </Card>
           </div>
         </div>
-
       </div>
-
     </MainLayout>
   </StudentLayout>
 </template>
