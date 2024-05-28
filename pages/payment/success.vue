@@ -39,7 +39,7 @@ type Payment = {
   paymentToken: string;
 }
 
-function fetchInfo() {
+async function fetchInfo() {
   const localToken = localStorage.getItem('paymentToken')
 
   loading.value = true
@@ -75,7 +75,7 @@ function fetchInfo() {
 }
 
 onMounted(async () => {
-  fetchInfo()
+  await fetchInfo()
 })
 </script>
 
