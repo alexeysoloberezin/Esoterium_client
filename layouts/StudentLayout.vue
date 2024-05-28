@@ -19,6 +19,8 @@ onMounted(() => {
     navigateTo('/auth/login')
   }
 })
+
+
 </script>
 
 <style scoped>
