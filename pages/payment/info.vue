@@ -9,6 +9,8 @@
       <h3 class="mb-2">Введите Email который указывали при оплате.</h3>
       <input v-model="email" class="infoPage-inp" placeholder="Email" type="text">
 
+      visible: {{ visible }}
+      loading: {{ loading }}
       <button class="telegramContact-btn mt-2" @click="fetchList">
         {{
           loading
