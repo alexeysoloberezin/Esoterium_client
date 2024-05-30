@@ -1,10 +1,11 @@
 <template>
-  <div :class="{'hidden-header': !isHeaderVisible}" class="header flex fixed top-0 z-[2000] left-0 w-full h-[100px]  items-center justify-between lg:pr-10 pr-5 lg:pl-10">
-<!--    <div v-if="width < 1200" @click="openMenu = !openMenu" style="width: 30px" class="cursor-pointer mr-2">-->
-<!--      <svg style="width: 30px;height:30px" fill="#fff" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="100" height="100" viewBox="0 0 50 50">-->
-<!--        <path d="M 3 8 A 2.0002 2.0002 0 1 0 3 12 L 47 12 A 2.0002 2.0002 0 1 0 47 8 L 3 8 z M 3 23 A 2.0002 2.0002 0 1 0 3 27 L 47 27 A 2.0002 2.0002 0 1 0 47 23 L 3 23 z M 3 38 A 2.0002 2.0002 0 1 0 3 42 L 47 42 A 2.0002 2.0002 0 1 0 47 38 L 3 38 z"></path>-->
-<!--      </svg>-->
-<!--    </div>-->
+  <div :class="{'hidden-header': !isHeaderVisible}"
+       class="header flex fixed top-0 z-[2000] left-0 w-full h-[100px]  items-center justify-between lg:pr-10 pr-5 lg:pl-10">
+    <!--    <div v-if="width < 1200" @click="openMenu = !openMenu" style="width: 30px" class="cursor-pointer mr-2">-->
+    <!--      <svg style="width: 30px;height:30px" fill="#fff" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="100" height="100" viewBox="0 0 50 50">-->
+    <!--        <path d="M 3 8 A 2.0002 2.0002 0 1 0 3 12 L 47 12 A 2.0002 2.0002 0 1 0 47 8 L 3 8 z M 3 23 A 2.0002 2.0002 0 1 0 3 27 L 47 27 A 2.0002 2.0002 0 1 0 47 23 L 3 23 z M 3 38 A 2.0002 2.0002 0 1 0 3 42 L 47 42 A 2.0002 2.0002 0 1 0 47 38 L 3 38 z"></path>-->
+    <!--      </svg>-->
+    <!--    </div>-->
 
 
     <div class="mobLogo mr-auto">
@@ -13,9 +14,12 @@
 
     <div class="navHead-overlay" :class="{'active': openMenu}">
     </div>
-    <nav class="flex items-center w-full navHead" :class="{'active': openMenu}" >
+    <nav class="flex items-center w-full navHead" :class="{'active': openMenu}">
       <div @click="openMenu = !openMenu" class="navHead-close">
-        <svg class="" fill="#fff" style="width: 30px;height:30px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><title>arrow-left</title><path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" /></svg>
+        <svg class="" fill="#fff" style="width: 30px;height:30px" xmlns="http://www.w3.org/2000/svg"
+             viewBox="0 0 24 24"><title>arrow-left</title>
+          <path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z"/>
+        </svg>
       </div>
 
       <div class="flex  items-center w-full navHead-wrp">
@@ -32,21 +36,15 @@
     <StartLoading
     />
 
-    <div v-if="savedStudent" class="text-white">
-      <Button  @click="visible = true"  size="small" outlined class="hoverable px-3 mr-3" style="height: 40px">
-        <div v-if="width > 1200">У&nbsp;вас&nbsp;есть&nbsp;доступный&nbsp;контакт</div>
-        <div v-else>Доступное</div>
-      </Button>
-
-      <Dialog v-model:visible="visible" modal :closable="false" class="successTelegramModal">
-        <TelegramContact :no-ask="true" :telegram="savedStudent.telegram" :show-close="true" @update:close="() => visible = false"/>
-      </Dialog>
-    </div>
-    <div v-else class="flex lg:mt-0">
-      <a href="/#form">
+    <div  class="flex lg:mt-0">
+      <NuxtLink to="/payment/info">
+        <Button size="small" outlined class="hoverable px-3 mr-3" style="height: 40px">
+          <div>Мои&nbsp;покупки</div>
+        </Button>
+      </NuxtLink>
+      <a v-if="width > 1200" href="/#form">
         <Button size="small" class="hoverable px-3" style="height: 40px">
-          <div v-if="width > 1200">Заказать&nbsp;услугу</div>
-          <div v-else @click="scroll">Заказать</div>
+          <div >Заказать&nbsp;услугу</div>
         </Button>
       </a>
 
@@ -55,7 +53,7 @@
 </template>
 <script setup lang="ts">
 import {ref} from "vue";
-import { onMounted, onUnmounted } from 'vue';
+import {onMounted, onUnmounted} from 'vue';
 import {useLocalStorage, useStorage, useWindowSize} from "@vueuse/core";
 import StartLoading from "@/components/StartLoading.vue";
 import TelegramContact from "@/components/TelegramContact.vue";
@@ -73,27 +71,27 @@ const savedStudent = useStorage('student',
 const visible = ref(false)
 
 const goTo = (link) => {
-  if(width.value < 1200){
+  if (width.value < 1200) {
     openMenu.value = false
   }
 }
 
- const navLinks = [
-  { name: 'Главная', url: '/#home' },
-  { name: 'О нас', url: '/#about' },
-  { name: 'Почему мы', url: '/#whywe' },
+const navLinks = [
+  {name: 'Главная', url: '/#home'},
+  {name: 'О нас', url: '/#about'},
+  {name: 'Почему мы', url: '/#whywe'},
   // { name: 'Sanita App', url: '#' },
-   { name: 'Как это работает', url: '/#howItsWork' },
-   // { name: 'Blog', url: '/#blog' },
-  { name: 'Отзывы', url: '/#reviews' },
-  { name: 'Заказать услугу', url: '/#form' },
+  {name: 'Как это работает', url: '/#howItsWork'},
+  // { name: 'Blog', url: '/#blog' },
+  {name: 'Отзывы', url: '/#reviews'},
+  {name: 'Заказать услугу', url: '/#form'},
 ];
 
 
 const isHeaderVisible = ref(true);
 const isAdmin = ref(true)
 
-const { width }  = useWindowSize()
+const {width} = useWindowSize()
 let lastScrollPosition = 0;
 
 const handleScroll = () => {
@@ -130,17 +128,17 @@ const scroll = () => {
   transform: translateY(-100px);
 }
 
-.mobLogo{
+.mobLogo {
   display: none;
   @media (max-width: 1200px) {
     display: block;
-    img{
+    img {
       max-width: 170px !important;
     }
   }
 }
 
-.navHead-overlay{
+.navHead-overlay {
   position: fixed;
   top: 0;
   left: 0;
@@ -150,20 +148,22 @@ const scroll = () => {
   pointer-events: none;
   background: rgba(0, 0, 0, 0.55);
   z-index: 300;
-  backdrop-filter:  blur(5px);
+  backdrop-filter: blur(5px);
   transition: opacity .4s ease-in-out;
   opacity: 0;
-  &.active{
+
+  &.active {
     opacity: 1;
     transform: scale(1);
     pointer-events: initial;
   }
 }
 
-.navHead{
-  &-close{
+.navHead {
+  &-close {
     display: none;
   }
+
   @media (max-width: 1200px) {
     flex-direction: column;
     position: fixed;
@@ -178,13 +178,13 @@ const scroll = () => {
     width: 285px !important;
     transition: .4s ease-in-out;
 
-    .logo{
+    .logo {
       margin: 5px auto 0;
     }
-    &.active{
+    &.active {
       transform: translateX(0%);
     }
-    &-close{
+    &-close {
       display: flex;
       align-items: center;
       justify-content: center;
@@ -194,21 +194,23 @@ const scroll = () => {
       height: 55px;
       border-bottom: 1px solid rgba(255, 255, 255, 0.11);
     }
-    &-wrp{
+    &-wrp {
       flex-direction: column !important;
     }
-    &-list{
+    &-list {
       display: flex !important;
       margin-left: 0 !important;
       padding: 0 10px !important;
       margin-top: 0 !important;
       gap: 0px !important;
       flex-direction: column !important;
-      li{
+
+      li {
         width: 100%;
         text-align: center;
       }
-      a{
+
+      a {
         padding: 15px 10px;
         display: block;
         width: 100%;
@@ -216,35 +218,40 @@ const scroll = () => {
     }
   }
 }
-.header{
+
+.header {
   position: fixed;
   top: 0;
   width: 100vw;
   z-index: 50;
   transition: transform 0.3s ease-in-out;
-  padding: 15px ;
+  padding: 15px;
   display: flex;
   align-items: center;
 
   @media (max-width: 1200px) {
-    padding: 10px 15px!important;
-    .logo{
+    padding: 10px 15px !important;
+    .logo {
       max-width: 220px;
     }
   }
+
   nav ul {
     display: flex;
     align-items: center;
     gap: 45px;
   }
-  li{
+
+  li {
     list-style: none;
   }
-  a{
+
+  a {
     color: #fff;
     cursor: pointer;
     text-decoration: none !important;
-    &:hover{
+
+    &:hover {
       color: #ec66a1;
     }
   }
