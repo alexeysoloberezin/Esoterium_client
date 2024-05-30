@@ -17,10 +17,9 @@ export default defineNuxtConfig({
   ],
   plugins: ['~/plugins/swiper.ts'],
   primevue: {
-    /* Options */
     components: {
       include: ['Button', 'Toast','Chart', 'Badge','Card','Avatar','InputMask', 'Dropdown','Galleria', 'Message', 'Tag', 'DataTable','Menubar', 'InputText', 'Checkbox', 'Column', 'Dialog','Image', 'ConfirmPopup']
     }
   },
-  devtools: { enabled: true }
+  devtools: { enabled: false }
 })

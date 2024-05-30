@@ -21,6 +21,7 @@ const data = ref(null)
   background: #262525;
   outline: none;
   display: flex;
+  text-decoration: none;
   flex-direction: column;
   gap: 12px;
   width: 100%;

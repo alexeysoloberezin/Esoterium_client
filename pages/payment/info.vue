@@ -27,17 +27,19 @@
               : 'Получить список оплат'
         }}
       </button>
+
+      <div v-if="array.length" class="mt-4">
+        <PaymentItem
+            v-for="el in array"
+            :key="el.id"
+            :json="JSON.parse(el.json)"
+            :customer-email="el.customerEmail"
+            class="mb-2"
+        />
+      </div>
     </div>
 
-    <div v-if="array.length">
-      <PaymentItem
-        v-for="el in array"
-        :key="el.id"
-        :json="JSON.parse(el.json)"
-        :customer-email="el.customerEmail"
-        class="mb-2"
-      />
-    </div>
+
 
 
     <Dialog v-model:visible="visible" modal  :style="{ width: '25rem' }">
@@ -92,12 +94,13 @@ const confirmPhone = async () => {
   })
 
   if(status.value === 'success'){
-    useNuxtApp().$toast?.error(data.value.message)
-
     if(data.value.status === 'success'){
+      useNuxtApp().$toast?.success(data.value.message)
       array.value = data.value.paymentList
       phone.value = ''
       visible.value = false
+    }else{
+      useNuxtApp().$toast?.error(data.value.message)
     }
   }else if (status.value === 'error'){
     useNuxtApp().$toast?.error('Ошибка')
