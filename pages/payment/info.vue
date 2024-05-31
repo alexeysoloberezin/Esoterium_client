@@ -30,9 +30,10 @@
 
       <div v-if="array.length" class="mt-4">
         <PaymentItem
-            v-for="el in array"
+            v-for="(el, index) in array"
             :key="el.id"
             :json="JSON.parse(el.json)"
+            :number="index + 1"
             :customer-email="el.customerEmail"
             class="mb-2"
         />

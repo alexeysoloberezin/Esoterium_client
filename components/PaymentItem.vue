@@ -1,6 +1,7 @@
 <template>
   <a :href="json.student.telegram" target="_blank" class="paymentItem">
-    <h3>{{ customerEmail }}</h3>
+    <h3>Оплата - {{ number }}</h3>
+    <h4>{{ customerEmail }}</h4>
     <h4>{{ json.student.telegram }}</h4>
   </a>
 </template>
@@ -9,7 +10,7 @@
 const props = defineProps<{
   customerEmail: string,
   json: any,
-
+  number: string,
 }>()
 
 const data = ref(null)

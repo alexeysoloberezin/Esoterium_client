@@ -12,7 +12,7 @@ definePageMeta({
   ],
 });
 
-const tehWorks = ref(true)
+const tehWorks = ref(false)
 
 onMounted(() => {
   if (tehWorks.value) {

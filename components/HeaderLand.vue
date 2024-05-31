@@ -239,7 +239,7 @@ const scroll = () => {
   nav ul {
     display: flex;
     align-items: center;
-    gap: 45px;
+    gap: 35px;
   }
 
   li {
