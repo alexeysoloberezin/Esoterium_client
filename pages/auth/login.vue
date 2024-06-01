@@ -42,7 +42,7 @@
 <script setup lang="ts">
 import {useAuthStore} from "@/store/auth";
 import {useNuxtApp, useRoute} from "nuxt/app";
-gi
+
 const authStore = useAuthStore()
 const tehWorks = ref(false)
 
