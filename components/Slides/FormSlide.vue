@@ -14,11 +14,13 @@
         <form class="relative z-5 p-4 shadow-2 form bg-card border-round formSlide  w-full mt-3"
               style="max-width: 700px">
           <div>
-            <label for="em" class="block  font-medium mb-2">Почта</label>
+            <label for="em" class="block  font-medium mb-2">Почта:</label>
             <InputText v-model="form.email" id="em" type="text" class="w-full p-2 mb-3"/>
+
+            <label for="em" class="block  font-medium mb-2">Промокод:</label>
             <InputText v-model="form.promocode" id="promo" type="text" class="w-full p-2 mb-3"/>
 
-            <label for="phone" class="block  font-medium mb-2">Телефон</label>
+            <label for="phone" class="block  font-medium mb-2">Телефон:</label>
             <InputMask v-model="form.phone" id="phone" mask="+7(999)-999-99-99" placeholder="+7(912)-854-34-12"
                        class="w-full p-2 mb-4"/>
 
