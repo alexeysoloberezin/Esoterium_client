@@ -49,7 +49,7 @@ const form = ref({
   email: '',
   phone: '',
   promocode: '',
-  typeProduct: 'Diagnost',
+  typeProduct: 'DiagnostPlusCorr',
 })
 
 const productTypes = ref(productTypesTemplate);
