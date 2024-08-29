@@ -3,10 +3,9 @@
     <div class="">
       <div class="container_wrp">
         <h1 :style="getDelay(1)"> Готовы узнать всё о себе, своём будущем и исполнить все свои мечты?<br/></h1>
-        <p style="font-size: 15px">Стоимость диагностики всех сфер жизни по ладони <b>7500₽</b>, коррекция всех сфер
-          жизни также
-          <b>7500₽</b>, при покупке
-          комбо Диагностика+Коррекция вы получите приятный подарок!
+        <p style="font-size: 15px">
+          Стоимость диагностики и коррекции   <b>15000₽</b>, после оплаты - вы получите контакт своего хироманта, которому нужно
+          будет отправить фото и данные о себе, как в примере выше
         </p>
         <p class="pt-2" style="font-size: 15px">Возможна оплата в рассрочку от банка без переплат и первоначального
           взноса.</p>
@@ -24,7 +23,8 @@
             <InputMask v-model="form.phone" id="phone" mask="+7(999)-999-99-99" placeholder="+7(912)-854-34-12"
                        class="w-full p-2 mb-4"/>
 
-            <Dropdown v-model="form.typeProduct" :options="productTypes" option-value="code" optionLabel="name" placeholder="Select a City"
+            <Dropdown v-model="form.typeProduct" :options="productTypes" option-value="code" optionLabel="name"
+                      placeholder="Select a City"
                       class="w-full"/>
 
             <Button @click="pay" :loading="loading" :label="loading ? 'Загрузка...' : 'Купить'"
