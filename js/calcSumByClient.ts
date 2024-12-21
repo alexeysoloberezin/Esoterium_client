@@ -1,7 +1,7 @@
 export const productTypesTemplate = [
   { name: 'Диагностика всех сфер жизни 7500₽', code: 'Diagnost', price: 5000 },
   { name: 'Коррекция всех сфер жизни 5000₽', code: 'DiagnostPlusCorr', price: 5000 },
-  { name: 'Диагностика+коррекция+подарок 1000₽', code: 'Diagnost_2', price: 10000 },
+  { name: 'Диагностика+коррекция+подарок 10000₽', code: 'Diagnost_2', price: 10000 },
 ]
 
 export const prices = {
