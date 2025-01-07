@@ -79,6 +79,7 @@ import HowItsWork from '../components/Slides/HowItsWork.vue'
 import gsap from 'gsap';
 import MobilePage from "../components/MobilePage.vue";
 import Correct from '../components/Slides/Correct.vue'
+import Team from "@/components/Slides/Team.vue";
 
 SwiperCore.use([Pagination, Mousewheel, HashNavigation, FreeMode, Scrollbar]);
 
@@ -241,6 +242,10 @@ const slides = [
     hash: "whywe",
   },
   {
+    component: Team,
+    hash: "team",
+  },
+  {
     component: HowItsWork,
     hash: "howItsWork",
   },
@@ -248,10 +253,10 @@ const slides = [
     component: Correct,
     hash: "whywe",
   },
-  {
-    component: Reviews,
-    hash: "reviews",
-  },
+  // {
+  //   component: Reviews,
+  //   hash: "reviews",
+  // },
   {
     component: FormSlide,
     hash: "form",

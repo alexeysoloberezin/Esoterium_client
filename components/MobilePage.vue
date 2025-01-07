@@ -5,7 +5,7 @@
     <WhyWe />
     <HowItsWork />
     <Correct />
-    <Reviews />
+    <Team />
     <FormSlide />
 <!--    <div class="mobilePage-wrp">-->
 <!--      <div class="mobilePage-box">-->
@@ -58,7 +58,7 @@
 
 import About from "./Slides/About.vue";
 import Slide1 from "./Slides/Slide1.vue";
-import Reviews from "./Slides/Reviews.vue";
+import Team from "./Slides/Team.vue";
 import WhyWe from "./Slides/WhyWe.vue";
 import FormSlide from "./Slides/FormSlide.vue";
 import HowItsWork from "./Slides/HowItsWork.vue";

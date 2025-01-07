@@ -83,7 +83,7 @@ const navLinks = [
   // { name: 'Sanita App', url: '#' },
   {name: 'Как это работает', url: '/#howItsWork'},
   // { name: 'Blog', url: '/#blog' },
-  {name: 'Отзывы', url: '/#reviews'},
+  {name: 'Отзывы', url: '/#team'},
   {name: 'Заказать услугу', url: '/#form'},
 ];
 
